@@ -1,0 +1,15 @@
+#:kivy 2.0.0
+
+<MainScreen>:
+    label_wid: my_custom_label
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+
+        Button:
+            text: 'My controller info is: '
+            on_press: root.manager.current = 'login'
+        Label:
+            id: my_custom_label
+            text: 'Please log out'

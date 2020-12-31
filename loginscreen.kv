@@ -1,0 +1,23 @@
+#:kivy 2.0.0
+
+<LoginScreen>:
+    label_wid: my_custom_label
+
+    BoxLayout:
+        orientation: 'vertical'
+        width:800
+        height:600
+        padding: 20
+
+        Button:
+            text: 'My controller info is: '
+            on_press: root.manager.current = 'main'
+            font_name: 'Inter'
+            markup: True
+            font_size: 48
+        Label:
+            id: my_custom_label
+            text: 'Please Login'
+            font_name: 'Inter'
+            font_size: 22
+            markup: True
