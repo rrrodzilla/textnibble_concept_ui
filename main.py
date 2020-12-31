@@ -1,11 +1,13 @@
 import kivy
-from kivy.uix.floatlayout import FloatLayout
+from kivy import Config
 from kivy.app import App
+from kivy.core.text import LabelBase
 from kivy.properties import ObjectProperty, StringProperty
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import ScreenManager, FadeTransition
+
 from loginscreen import LoginScreen
 from mainscreen import Mainscreen
-from kivy.core.text import LabelBase
 
 kivy.require('2.0.0')
 
@@ -39,4 +41,6 @@ if __name__ == '__main__':
                        fn_bold="./fonts/Inter-Black.ttf",
                        fn_italic="./fonts/Inter-Light.ttf",
                        fn_bolditalic="./fonts/Inter-SemiBold.ttf")
+    Config.set('graphics', 'width', '960')
+    Config.set('graphics', 'height', '540')
     Textnibble().run()
