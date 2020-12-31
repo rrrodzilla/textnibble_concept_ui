@@ -1,0 +1,14 @@
+#:kivy 2.0.0
+#:import C kivy.utils.get_color_from_hex
+
+<PinCharacter@AnchorLayout>:
+    anchor_y: 'center'
+    anchor_x: 'center'
+    Label:
+        canvas.before:
+            Color:
+                rgb: C('3F3F46')
+            Ellipse:
+                pos: self.pos
+                size: self.size
+        size_hint: .75, .75

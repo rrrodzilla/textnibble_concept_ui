@@ -2,13 +2,14 @@
 #:import C kivy.utils.get_color_from_hex
 #:import Keypad keypad
 #:include keypad.kv
+#:import PinDisplay pindisplay
+#:include pindisplay.kv
 
 <LoginScreen>:
-
     AnchorLayout:
         canvas.before:
             Color:
-                rgb: C('#27272A')
+                rgb: C('#18181B')
             Rectangle:
                 pos: self.pos
                 size: self.size
@@ -20,51 +21,14 @@
             orientation: 'vertical'
             spacing: 20
             size_hint: .40, .95
-            BoxLayout:
+            PinDisplay:
                 size_hint: 1, .3
-                canvas.before:
-                    Color:
-                        rgb: C('#18181B')
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
-                orientation: 'horizontal'
-                Label:
-                    text: '[b]*[/b]'
-                    font_name: 'Inter'
-                    font_size: 64
-                    markup: True
-                    width: 300
-                Label:
-                    text: '*'
-                    font_name: 'Inter'
-                    font_size: 64
-                    markup: True
-                    width: 300
-                Label:
-                    text: '*'
-                    font_name: 'Inter'
-                    font_size: 64
-                    markup: True
-                    width: 300
-                Label:
-                    text: '*'
-                    font_name: 'Inter'
-                    font_size: 64
-                    markup: True
-                    width: 300
             Keypad:
             BoxLayout:
                 spacing: 5
                 orientation: 'horizontal'
                 size_hint: 1, .3
                 Button:
-#                    canvas.before:
-#                        Color:
-#                            rgb: C('#86EFAC')
-#                        Rectangle:
-#                            pos: self.pos
-#                            size: self.size
                     text: 'Clear'
                     background_normal: ''
                     background_color: C('#15803D')
@@ -75,16 +39,10 @@
                     font_size: 24
                     size_hint: .75, .75
                 Button:
-#                    canvas.before:
-#                        Color:
-#                            rgb: C('#86EFAC')
-#                        Rectangle:
-#                            pos: self.pos
-#                            size: self.size
+
                     text: 'Login'
                     background_normal: ''
                     background_color: C('#15803D')
-                    disabled: True
                     on_press: root.manager.current = 'main'
                     font_name: 'Inter'
                     markup: True
