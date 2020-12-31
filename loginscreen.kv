@@ -1,8 +1,7 @@
 #:kivy 2.0.0
 #:import C kivy.utils.get_color_from_hex
-#:import KeypadButton keypadbutton
-#:include keypadbutton.kv
-
+#:import Keypad keypad
+#:include keypad.kv
 
 <LoginScreen>:
 
@@ -54,30 +53,7 @@
                     font_size: 64
                     markup: True
                     width: 300
-            GridLayout:
-                cols: 3
-                spacing: 10
-                KeypadButton:
-                    text: '1'
-                KeypadButton:
-                    text: '2'
-                KeypadButton:
-                    text: '3'
-                KeypadButton:
-                    text: '4'
-                KeypadButton:
-                    text: '5'
-                KeypadButton:
-                    text: '6'
-                KeypadButton:
-                    text: '7'
-                KeypadButton:
-                    text: '8'
-                KeypadButton:
-                    text: '9'
-                RelativeLayout:
-                KeypadButton:
-                    text: '0'
+            Keypad:
             BoxLayout:
                 spacing: 5
                 orientation: 'horizontal'
