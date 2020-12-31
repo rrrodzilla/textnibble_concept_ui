@@ -3,5 +3,9 @@ from kivy.uix.button import Button
 
 
 class KeypadButton(Button):
-    button_text = StringProperty(None)
+    def __init__(self, **kwargs):
+        super(KeypadButton, self).__init__(**kwargs)
+
+    key_val = StringProperty(None)
+
 

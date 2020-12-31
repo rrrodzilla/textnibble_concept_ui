@@ -2,7 +2,8 @@
 #:import C kivy.utils.get_color_from_hex
 #:import KeypadButton keypadbutton
 #:include keypadbutton.kv
-
+<KeypadButton>:
+    on_press: print(self.key_val)
 <Keypad@GridLayout>:
     cols: 3
     spacing: 8
