@@ -2,30 +2,49 @@
 #:import C kivy.utils.get_color_from_hex
 #:import KeypadButton keypadbutton
 #:include keypadbutton.kv
-<KeypadButton>:
-    on_press: print(self.key_val)
+
 <Keypad@GridLayout>:
     cols: 3
     spacing: 8
     KeypadButton:
         text: '1'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
     KeypadButton:
         text: '2'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
     KeypadButton:
         text: '3'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
     KeypadButton:
         text: '4'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
     KeypadButton:
         text: '5'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
     KeypadButton:
         text: '6'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
     KeypadButton:
         text: '7'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
     KeypadButton:
         text: '8'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
     KeypadButton:
         text: '9'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
     RelativeLayout:
     KeypadButton:
         text: '0'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
 
