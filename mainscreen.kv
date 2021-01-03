@@ -1,15 +1,83 @@
 #:kivy 2.0.0
+#:import RoundedRectangle kivy.graphics
+#:import C kivy.utils.get_color_from_hex
 
 <MainScreen>:
     label_wid: my_custom_label
 
     BoxLayout:
         orientation: 'vertical'
-        padding: 20
 
-        Button:
-            text: 'My controller info is: '
-            on_press: root.manager.current = 'login'
-        Label:
-            id: my_custom_label
-            text: 'Please log out'
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 1, .10
+            padding: 4
+            StackLayout:
+#                canvas.before:
+#                    Color:
+#                        rgb: C('#0000FF')
+#                    Rectangle:
+#                        size: self.size
+#                        pos: self.pos
+                padding_x: 20
+                Label:
+                    id: my_custom_label
+                    text: 'Logo'
+                    size_hint: .1, 1
+                    font_name: 'Inter'
+                    font_size: 18
+                    markup: True
+                    bold_italic: True
+                Label:
+                    id: my_custom_label
+                    text: '[i]Live Orders[/i]'
+                    size_hint: .15, 1
+                    font_name: 'Inter'
+                    font_size: 20
+                    markup: True
+                    bold_italic: True
+                Label:
+                    id: my_custom_label
+                    text: '[i]Previous Orders[/i]'
+                    size_hint: .15, 1
+                    font_name: 'Inter'
+                    font_size: 20
+                    markup: True
+            AnchorLayout:
+                anchor_y: 'center'
+                anchor_x: 'center'
+                size_hint: .1, 1
+#                canvas.before:
+#                    Color:
+#                        rgb: C('#00FF00')
+#                    Rectangle:
+#                        size: self.size
+#                        pos: self.pos
+                Button:
+                    canvas.before:
+                        Color:
+                            rgb: C('#FACC15')
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+                            radius: [4, 4, 4, 4]
+                    background_color: 0, 0, 0, 0
+                    text: 'Sign out'
+                    font_name: 'Inter'
+                    color: C('#27272A')
+                    markup: True
+                    size_hint_x: None
+                    size_hint_y: None
+                    height: 36
+                    width: 96
+                    on_press: root.manager.current = 'login'
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, .90
+            canvas.before:
+                Color:
+                    rgb: C('#3F3F46')
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
