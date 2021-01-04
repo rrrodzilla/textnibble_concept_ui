@@ -4,7 +4,7 @@
 <KeypadButton@Button>:
     canvas.before:
         Color:
-            rgb: (C('#15803D') if not self.disabled else C('#14532D')) #3F6212
+            rgb: (C('#15803D') if not self.disabled else C('#3F3F46')) #3F6212
         RoundedRectangle:
             size: self.size
             pos: self.pos
@@ -15,5 +15,8 @@
     markup: True
     font_name: 'Inter'
     font_size: 24
+    size_hint_x: None
+    size_hint_y: None
+    size: [64, 64]
     color: C('#18181B')
     key_val: self.text

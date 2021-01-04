@@ -4,6 +4,9 @@
 #:include keypadbutton.kv
 
 <Keypad@GridLayout>:
+    width: self.minimum_width
+    height: self.minimum_height
+    size_hint: None, None
     cols: 3
     spacing: 8
     KeypadButton:
