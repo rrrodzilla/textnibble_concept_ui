@@ -4,4 +4,5 @@ from order import Order
 
 
 class LiveOrdersScreen(Screen):
-    pass
+    def add_order(self):
+        self.ids.main_layout.add_widget(Order())

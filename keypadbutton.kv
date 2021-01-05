@@ -1,7 +1,7 @@
 #:kivy 2.0.0
 #:import C kivy.utils.get_color_from_hex
 
-<KeypadButton@Button>:
+<KeypadButton>:
     canvas.before:
         Color:
             rgb: (C('#15803D') if not self.disabled else C('#3F3F46')) #3F6212
@@ -18,5 +18,5 @@
     size_hint_x: None
     size_hint_y: None
     size: [96, 96]
-    color: C('#18181B')
+    color: C('#27272A')
     key_val: self.text

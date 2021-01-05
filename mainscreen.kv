@@ -13,7 +13,8 @@
 
         BoxLayout:
             orientation: 'horizontal'
-            size_hint: 1, .10
+            size_hint: 1, None
+            height: 96
             padding: 4
             StackLayout:
 #                canvas.before:
@@ -31,6 +32,16 @@
                     pos_hint: {"center_x": .5}
                     pos_hint: {"center_y": .5}
                 Button:
+                    text: '[i]Action Needed[/i]'
+                    size_hint: .15, 1
+                    font_name: 'Inter'
+                    font_size: 18
+                    color: C('#F87171')
+                    background_normal:''
+                    background_color: 0,0,0,0
+                    on_press: content_manager.switch_to(live_orders, direction='left')
+                    markup: True
+                Button:
                     text: '[i]Open Orders[/i]'
                     size_hint: .15, 1
                     font_name: 'Inter'
@@ -40,7 +51,7 @@
                     on_press: content_manager.switch_to(live_orders, direction='left')
                     markup: True
                 Button:
-                    text: '[i]Closed Orders[/i]'
+                    text: '[i]Past Orders[/i]'
                     size_hint: .15, 1
                     background_normal:''
                     background_color: 0,0,0,0

@@ -13,6 +13,7 @@
     markup: True
     color: C('#F4F4F5')
 <Order>:
+    accent_color:
     canvas.before:
         Color:
             rgb: C('#000000')
@@ -26,7 +27,7 @@
     BoxLayout:
         canvas.before:
             Color:
-                rgb: C('#FACC15')
+                rgb: root.accent_color
             RoundedRectangle:
                 pos: self.pos
                 size: self.size
@@ -39,6 +40,7 @@
         font_size: 14
         text: '[size=64][b]21[/b][/size]\nminutes ago'
         valign: 'center'
+        color: C('#E4E4E7')
         halign: 'center'
         text_size: self.size
     BoxLayout:
@@ -54,6 +56,7 @@
         Label:
             text: 'two large lattes and a blueberry muffin'
             valign: 'top'
+            color: C('#A1A1AA')
             font_size: 16
             text_size: self.size
             multiline: True
