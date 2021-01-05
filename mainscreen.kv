@@ -27,8 +27,9 @@
                     source: './images/logo-horizontal-reversed@3x.png'
                     color: C('#A1A1AA')
                     allow_stretch: True
-                    size_hint: .1, None
+                    size_hint: .1, 1
                     pos_hint: {"center_x": .5}
+                    pos_hint: {"center_y": .5}
                 Button:
                     text: '[i]Open Orders[/i]'
                     size_hint: .15, 1
@@ -54,7 +55,7 @@
                 Button:
                     canvas.before:
                         Color:
-                            rgb: C('#FACC15')
+                            rgb: C('#9F1239')
                         RoundedRectangle:
                             size: self.size
                             pos: self.pos
@@ -62,7 +63,7 @@
                     background_color: 0, 0, 0, 0
                     text: 'Sign out'
                     font_name: 'Inter'
-                    color: C('#27272A')
+                    color: C('#FFF1F2')
                     markup: True
                     font_size: 18
                     size_hint_x: None

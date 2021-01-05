@@ -1,5 +1,7 @@
 #:kivy 2.0.0
 #:import C kivy.utils.get_color_from_hex
+#:import Order order
+#:include order.kv
 
 <LiveOrdersScreen>:
     canvas.before:
@@ -9,8 +11,56 @@
             pos: self.pos
             size: self.size
     name: 'live_orders'
-    BoxLayout:
-        size_hint: 1, 1
-        orientation: 'vertical'
-        Label:
-            text: 'live orders'
+    ScrollView:
+#        canvas.before:
+#            Color:
+#                rgb: C('#00FF00')
+#            Rectangle:
+#                pos: self.pos
+#                size: self.size
+        size_hint: None, 1
+        pos_hint: {"center_x": .5}
+        width: main_layout.minimum_width
+        do_scroll_x: False
+        do_scroll_y: True
+        GridLayout:
+#            canvas.before:
+#                Color:
+#                    rgb: C('#0000FF')
+#                Rectangle:
+#                    pos: self.pos
+#                    size: self.size
+            id: main_layout
+            halign: 'center'
+            spacing: 24
+            padding: 64
+            size_hint: None, None
+            height: self.minimum_height
+            width: self.minimum_width
+            pos_hint: {"center_x": .1}
+            cols: int((root.width-144) / 375)
+    #        orientation: 'vertical'
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
+            Order:
