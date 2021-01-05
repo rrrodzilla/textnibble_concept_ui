@@ -24,22 +24,33 @@
             on_add_digit: pin_display.enable(len(self.pin))
         BoxLayout:
             orientation: 'vertical'
-            spacing: 0
+            spacing: 4
             pos_hint: {"center_x": .5}
-            pos_hint: {"center_y": .75}
+            pos_hint: {"center_y": .65}
+            Image:
+                source: './images/logo-horizontal-reversed@3x.png'
+                color: C('#A1A1AA')
+                width: keypad.width
+                allow_stretch: True
+                size_hint: None, None
+                pos_hint: {"center_x": .5}
             PinDisplay:
                 id: pin_display
                 pos_hint: {"center_x": .5}
+                width: keypad.width
             Keypad:
+                id: keypad
                 disabled: pin_number.is_complete
                 on_key_pressed: pin_number.add_digit(args[1])
                 pos_hint: {"center_x": .5}
             BoxLayout:
-                spacing: 8
+                spacing: 6
                 pos_hint: {"center_x": .5}
                 width: self.minimum_width
                 size_hint: None, None
+                height: self.minimum_height
                 orientation: 'horizontal'
+                padding: 0, 12
                 Button:
                     canvas.before:
                         Color:
@@ -57,7 +68,7 @@
                     markup: True
                     font_size: 18
                     size_hint: None, None
-                    size: [64, 64]
+                    size: [96, 96]
                     pos_hint: {"center_y": .5}
                 Button:
                     canvas.before:
@@ -77,7 +88,7 @@
                     markup: True
                     size_hint_x: None
                     size_hint_y: None
-                    size: [138, 64]
+                    size: [202, 96]
                     pos_hint: {"center_y": .5}
             BoxLayout:
                 size_hint: None, None

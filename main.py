@@ -41,6 +41,8 @@ if __name__ == '__main__':
                        fn_bold="./fonts/Inter-Black.ttf",
                        fn_italic="./fonts/Inter-Light.ttf",
                        fn_bolditalic="./fonts/Inter-SemiBold.ttf")
+    # Config.set('graphics', 'width', '1920')
+    # Config.set('graphics', 'height', '1080')
     Config.set('graphics', 'width', '1920')
     Config.set('graphics', 'height', '1080')
     Textnibble().run()

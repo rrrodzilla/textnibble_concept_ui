@@ -19,40 +19,31 @@
 #                    Rectangle:
 #                        size: self.size
 #                        pos: self.pos
-                padding_x: 20
+#                padding_x: 20
+                Image:
+                    source: './images/logo-horizontal-reversed@3x.png'
+                    color: C('#A1A1AA')
+                    allow_stretch: True
+                    size_hint: .1, None
+                    pos_hint: {"center_x": .5}
                 Label:
                     id: my_custom_label
-                    text: 'Logo'
-                    size_hint: .1, 1
+                    text: '[i]Open Orders[/i]'
+                    size_hint: .15, 1
                     font_name: 'Inter'
                     font_size: 18
                     markup: True
-                    bold_italic: True
                 Label:
                     id: my_custom_label
-                    text: '[i]Live Orders[/i]'
+                    text: '[i]Closed Orders[/i]'
                     size_hint: .15, 1
                     font_name: 'Inter'
-                    font_size: 20
-                    markup: True
-                    bold_italic: True
-                Label:
-                    id: my_custom_label
-                    text: '[i]Previous Orders[/i]'
-                    size_hint: .15, 1
-                    font_name: 'Inter'
-                    font_size: 20
+                    font_size: 18
                     markup: True
             AnchorLayout:
                 anchor_y: 'center'
                 anchor_x: 'center'
                 size_hint: .1, 1
-#                canvas.before:
-#                    Color:
-#                        rgb: C('#00FF00')
-#                    Rectangle:
-#                        size: self.size
-#                        pos: self.pos
                 Button:
                     canvas.before:
                         Color:
@@ -66,18 +57,25 @@
                     font_name: 'Inter'
                     color: C('#27272A')
                     markup: True
+                    font_size: 18
                     size_hint_x: None
                     size_hint_y: None
-                    height: 36
-                    width: 96
+                    height: 48
+                    width: 128
                     on_press: root.manager.current = 'login'
-        BoxLayout:
+        PageLayout:
             orientation: 'vertical'
             size_hint: 1, .90
+            swipe_threshold: .1
             canvas.before:
                 Color:
                     rgb: C('#3F3F46')
                 Rectangle:
                     size: self.size
                     pos: self.pos
-
+            Button:
+                text: 'live orders'
+            Button:
+                text: 'search orders'
+            Button:
+                text: 'settings'
