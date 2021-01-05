@@ -1,9 +1,12 @@
 #:kivy 2.0.0
 #:import RoundedRectangle kivy.graphics
 #:import C kivy.utils.get_color_from_hex
+#:import LiveOrdersScreen liveordersscreen
+#:import PreviousOrdersScreen previousordersscreen
+#:include liveordersscreen.kv
+#:include previousordersscreen.kv
 
 <MainScreen>:
-    label_wid: my_custom_label
 
     BoxLayout:
         orientation: 'vertical'
@@ -26,20 +29,24 @@
                     allow_stretch: True
                     size_hint: .1, None
                     pos_hint: {"center_x": .5}
-                Label:
-                    id: my_custom_label
+                Button:
                     text: '[i]Open Orders[/i]'
                     size_hint: .15, 1
                     font_name: 'Inter'
                     font_size: 18
+                    background_normal:''
+                    background_color: 0,0,0,0
+                    on_press: content_manager.switch_to(live_orders, direction='left')
                     markup: True
-                Label:
-                    id: my_custom_label
+                Button:
                     text: '[i]Closed Orders[/i]'
                     size_hint: .15, 1
+                    background_normal:''
+                    background_color: 0,0,0,0
                     font_name: 'Inter'
                     font_size: 18
                     markup: True
+                    on_touch_down: content_manager.switch_to(previous_orders, direction='right')
             AnchorLayout:
                 anchor_y: 'center'
                 anchor_x: 'center'
@@ -63,19 +70,9 @@
                     height: 48
                     width: 128
                     on_press: root.manager.current = 'login'
-        PageLayout:
-            orientation: 'vertical'
-            size_hint: 1, .90
-            swipe_threshold: .1
-            canvas.before:
-                Color:
-                    rgb: C('#3F3F46')
-                Rectangle:
-                    size: self.size
-                    pos: self.pos
-            Button:
-                text: 'live orders'
-            Button:
-                text: 'search orders'
-            Button:
-                text: 'settings'
+        ScreenManager:
+            id: content_manager
+            LiveOrdersScreen:
+                id: live_orders
+            PreviousOrdersScreen:
+                id: previous_orders

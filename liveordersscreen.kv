@@ -1,0 +1,16 @@
+#:kivy 2.0.0
+#:import C kivy.utils.get_color_from_hex
+
+<LiveOrdersScreen>:
+    canvas.before:
+        Color:
+            rgb: C('#18181B')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    name: 'live_orders'
+    BoxLayout:
+        size_hint: 1, 1
+        orientation: 'vertical'
+        Label:
+            text: 'live orders'
