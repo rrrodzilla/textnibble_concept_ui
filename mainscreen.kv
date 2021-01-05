@@ -3,8 +3,10 @@
 #:import C kivy.utils.get_color_from_hex
 #:import LiveOrdersScreen liveordersscreen
 #:import PreviousOrdersScreen previousordersscreen
+#:import OrderDetailScreen orderdetailscreen
 #:include liveordersscreen.kv
 #:include previousordersscreen.kv
+#:include orderdetailscreen.kv
 
 <MainScreen>:
 
@@ -39,7 +41,7 @@
                     color: C('#F87171')
                     background_normal:''
                     background_color: 0,0,0,0
-                    on_press: content_manager.switch_to(live_orders, direction='left')
+                    on_press: content_manager.current = 'live_orders'
                     markup: True
                 Button:
                     text: '[i]Open Orders[/i]'
@@ -48,7 +50,7 @@
                     font_size: 18
                     background_normal:''
                     background_color: 0,0,0,0
-                    on_press: content_manager.switch_to(live_orders, direction='left')
+                    on_press: content_manager.current = 'live_orders'
                     markup: True
                 Button:
                     text: '[i]Past Orders[/i]'
@@ -58,7 +60,7 @@
                     font_name: 'Inter'
                     font_size: 18
                     markup: True
-                    on_touch_down: content_manager.switch_to(previous_orders, direction='right')
+                    on_press: content_manager.current = 'previous_orders'
             AnchorLayout:
                 anchor_y: 'center'
                 anchor_x: 'center'
@@ -86,5 +88,9 @@
             id: content_manager
             LiveOrdersScreen:
                 id: live_orders
+                screen_manager: content_manager
+#                on_order_detail: content_manager.current = order_detail
             PreviousOrdersScreen:
                 id: previous_orders
+            OrderDetailScreen:
+                id: order_detail

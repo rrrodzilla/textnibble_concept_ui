@@ -4,6 +4,7 @@
 #:include order.kv
 
 <LiveOrdersScreen>:
+
     canvas.before:
         Color:
             rgb: C('#18181B')
@@ -24,7 +25,7 @@
         do_scroll_x: False
         do_scroll_y: True
         GridLayout:
-            on_touch_down: root.add_order()
+#            on_touch_down: root.add_order()
 #            canvas.before:
 #                Color:
 #                    rgb: C('#0000FF')
@@ -44,8 +45,12 @@
             Order:
                 accent_color: C('#4ADE80')
             Order:
+                on_press: root.screen_manager.current = 'order_detail'
             Order:
+                on_press: root.screen_manager.current = 'order_detail'
                 accent_color: C('#FBBF24')
             Order:
+                on_press: root.screen_manager.current = 'order_detail'
             Order:
+                on_press: root.screen_manager.current = 'order_detail'
                 accent_color: C('#F87171')
