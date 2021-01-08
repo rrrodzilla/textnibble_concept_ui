@@ -14,6 +14,7 @@
     color: C('#F4F4F5')
 <Order>:
     accent_color:
+    order_data: order_obj
     canvas.before:
         Color:
             rgb: C('#000000')
@@ -22,8 +23,8 @@
             size: self.size
             radius: 4, 4, 4, 4
     size_hint: None, None
-    width: 375
-    height: 124
+    width: 384
+    height: 128
     BoxLayout:
         canvas.before:
             Color:
@@ -38,7 +39,7 @@
     Label:
         size_hint: .45, 1
         font_size: 14
-        text: '[size=64][b]21[/b][/size]\nminutes ago'
+        text: '[size=60][b]21[/b][/size]\nminutes ago'
         valign: 'center'
         color: C('#E4E4E7')
         halign: 'center'
@@ -54,7 +55,8 @@
         orientation: 'vertical'
         padding: 12
         Label:
-            text: 'two large lattes and a blueberry muffin'
+            id: order_message_text
+            text: order_data.order_message
             valign: 'top'
             color: C('#A1A1AA')
             font_size: 16
@@ -66,4 +68,5 @@
             text_size: self.size
             size_hint: 1, .2
             color: C('#52525B')
+            font_size: 14
             halign: 'right'
