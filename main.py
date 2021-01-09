@@ -5,7 +5,6 @@ from kivy.core.text import LabelBase
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import ScreenManager, FadeTransition
-from kivy.garden import iconfonts
 
 from loginscreen import LoginScreen
 from mainscreen import Mainscreen
@@ -44,9 +43,7 @@ if __name__ == '__main__':
                        fn_bolditalic="./fonts/Inter-SemiBold.ttf")
     LabelBase.register(name="Icons",
                        fn_regular="./fonts/icofont.ttf")
-    # iconfonts.register('icon_font', './fonts/icofont.ttf', './fonts/icofont.fontd')
-    # Config.set('graphics', 'width', '1920')
-    # Config.set('graphics', 'height', '1080')
+
     Config.set('graphics', 'width', '1920')
     Config.set('graphics', 'height', '1080')
     Textnibble().run()

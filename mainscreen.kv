@@ -8,6 +8,8 @@
 #:include liveordersscreen.kv
 #:include previousordersscreen.kv
 #:include orderdetailscreen.kv
+#:import ActiveOrdersScreen activeordersscreen
+#:include activeordersscreen.kv
 
 <MainScreen>:
 
@@ -66,9 +68,10 @@
                         color: C('#F87171')
                         background_normal:''
                         background_color: 0,0,0,0
-                        on_press: content_manager.current = 'live_orders'
+                        on_press: content_manager.current = 'active_orders'
                         markup: True
                     Label:
+                        id: num_orders
                         canvas.before:
                             Color:
                                 rgb: C('#F87171')
@@ -135,10 +138,12 @@
                     on_press: root.manager.current = 'login'
         ScreenManager:
             id: content_manager
+            ActiveOrdersScreen:
+                id: active_orders
+                screen_manager: content_manager
             LiveOrdersScreen:
                 id: live_orders
                 screen_manager: content_manager
-#                on_order_detail: content_manager.current = order_detail
             PreviousOrdersScreen:
                 id: previous_orders
             OrderDetailScreen:
