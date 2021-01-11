@@ -22,6 +22,7 @@
             id: pin_number
             on_clear: pin_display.set_max_size(self.max_size)
             on_add_digit: pin_display.enable(len(self.pin))
+            on_complete: root.manager.current = 'main'
         BoxLayout:
             orientation: 'vertical'
             spacing: 4
@@ -68,28 +69,28 @@
                     markup: True
                     font_size: 18
                     size_hint: None, None
-                    size: [96, 64]
+                    size: [256, 64]
                     pos_hint: {"center_y": .5}
-                Button:
-                    canvas.before:
-                        Color:
-                            rgb: (C('#15803D') if not self.disabled else C('#3F3F46')) #3F6212
-                        RoundedRectangle:
-                            size: self.size
-                            pos: self.pos
-                            radius: [4, 4, 4, 4]
-                    background_color: 0, 0, 0, 0
-                    text: 'Login'
-                    on_press: root.manager.current = 'main'
-                    disabled: not pin_number.is_complete
-                    color: C('#18181B')
-                    font_name: 'Inter'
-                    font_size: 18
-                    markup: True
-                    size_hint_x: None
-                    size_hint_y: None
-                    size: [202, 64]
-                    pos_hint: {"center_y": .5}
+#                Button:
+#                    canvas.before:
+#                        Color:
+#                            rgb: (C('#15803D') if not self.disabled else C('#3F3F46')) #3F6212
+#                        RoundedRectangle:
+#                            size: self.size
+#                            pos: self.pos
+#                            radius: [4, 4, 4, 4]
+#                    background_color: 0, 0, 0, 0
+#                    text: 'Login'
+#                    on_press: root.manager.current = 'main'
+#                    disabled: not pin_number.is_complete
+#                    color: C('#18181B')
+#                    font_name: 'Inter'
+#                    font_size: 18
+#                    markup: True
+#                    size_hint_x: None
+#                    size_hint_y: None
+#                    size: [202, 64]
+#                    pos_hint: {"center_y": .5}
             BoxLayout:
                 size_hint: None, None
                 pos_hint: {"center_x": .5}

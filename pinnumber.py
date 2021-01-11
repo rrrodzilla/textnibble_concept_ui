@@ -11,8 +11,12 @@ class PinNumber(Widget):
     def __init__(self, **kwargs):
         super(PinNumber, self).__init__(**kwargs)
         self.register_event_type('on_clear')
+        self.register_event_type('on_complete')
         self.register_event_type('on_add_digit')
         self.pin: List[int] = []
+
+    def on_complete(self):
+        pass
 
     def add_digit(self, val: int):
 
@@ -23,6 +27,8 @@ class PinNumber(Widget):
         # else:
         #     print('NOT adding digi')
         self.is_complete = not (len(self.pin) < self.max_size)
+        if self.is_complete:
+            self.dispatch('on_complete')
         # print(f"\nPin length: {len(self.pin)}")
         # print(f"Max Size: {self.max_size}")
         # print(f"is_complete: {self.is_complete}")
