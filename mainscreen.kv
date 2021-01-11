@@ -1,125 +1,48 @@
 #:kivy 2.0.0
 #:import RoundedRectangle kivy.graphics
 #:import C kivy.utils.get_color_from_hex
-#:import SvgWidget svgwidget
 #:import LiveOrdersScreen liveordersscreen
-#:import PreviousOrdersScreen previousordersscreen
-#:import OrderDetailScreen orderdetailscreen
 #:include liveordersscreen.kv
+#:import PreviousOrdersScreen previousordersscreen
 #:include previousordersscreen.kv
+#:import OrderDetailScreen orderdetailscreen
 #:include orderdetailscreen.kv
 #:import ActiveOrdersScreen activeordersscreen
 #:include activeordersscreen.kv
+#:import WorkingOrdersScreen workingordersscreen
+#:include workingordersscreen.kv
+#:import AlertButton alertbutton
+#:include alertbutton.kv
+
 
 <MainScreen>:
-
     BoxLayout:
         orientation: 'vertical'
-
         BoxLayout:
             orientation: 'horizontal'
             size_hint: 1, None
             height: 96
             padding: 96, 0, 96, 0
             StackLayout:
-#                canvas.before:
-#                    Color:
-#                        rgb: C('#0000FF')
-#                    Rectangle:
-#                        size: self.size
-#                        pos: self.pos
-#                padding_x: 20
-                AnchorLayout:
-#                    canvas.before:
-#                        Color:
-#                            rgb: C('#0000FF')
-#                        Rectangle:
-#                            size: self.size
-#                            pos: self.pos
-                    size_hint: None, None
-                    anchor_x: 'right'
-                    anchor_y: 'center'
-                    Image:
-#                        canvas.before:
-#                            Color:
-#                                rgb: C('#FF0000')
-#                            Rectangle:
-#                                size: self.size
-#                                pos: self.pos
-                        source: './images/logo-mark@3x.png'
-                        color: C('#A1A1AA')
-                        size_hint: None, None
-                        allow_stretch: True
-                        height: 48
-                        width: 48
-                FloatLayout:
-#                    canvas.before:
-#                        Color:
-#                            rgb: C('#FF0000')
-#                        Rectangle:
-#                            size: self.size
-#                            pos: self.pos
+                Image:
+                    source: './images/logo-horizontal-reversed@3x.png'
+                    color: C('#A1A1AA')
                     size_hint: .15, 1
-                    Button:
-                        text: '[i]Action Needed[/i]'
-                        font_name: 'Inter'
-                        font_size: 18
-                        pos_hint: {"center_y": .5, "center_x": .5}
-                        color: C('#F87171')
-                        background_normal:''
-                        background_color: 0,0,0,0
-                        on_press: content_manager.current = 'active_orders'
-                        markup: True
-                    Label:
-                        id: num_orders
-                        canvas.before:
-                            Color:
-                                rgb: C('#F87171')
-                            Ellipse:
-                                size: self.size
-                                pos: self.pos
-                        pos_hint: {"center_y": .70, "center_x": .80}
-                        size_hint: None, None
-                        color: C('#27272A')
-                        font_name: 'Inter'
-                        bold: True
-                        height: 24
-                        width: 24
-                        font_size: 14
-                        text: '5'
-                Button:
-                    text: '[i]Open Orders[/i]'
+                    allow_stretch: True
+                AlertButton:
                     size_hint: .15, 1
-                    font_name: 'Inter'
-                    font_size: 18
-                    background_normal:''
-                    background_color: 0,0,0,0
-                    on_press: content_manager.current = 'live_orders'
-                    markup: True
-                Button:
-                    text: '[i]Past Orders[/i]'
+                    on_press: content_manager.current = 'active_orders'
+                    button_text: '[i]Action Needed[/i]'
+                    alert_text: f'{active_orders.order_total}'
+                AlertButton:
                     size_hint: .15, 1
-                    background_normal:''
-                    background_color: 0,0,0,0
-                    font_name: 'Inter'
-                    font_size: 18
-                    markup: True
-                    on_press: content_manager.current = 'previous_orders'
+                    on_press: content_manager.current = 'working_orders'
+                    button_text: 'Working Orders'
+                    alert_text: f'{working_orders.order_total}'
             AnchorLayout:
                 anchor_y: 'center'
                 anchor_x: 'center'
                 size_hint: .1, 1
-#                SvgWidget:
-#                    canvas.before:
-#                        Color:
-#                            rgb: C('#FF0000')
-#                        Rectangle:
-#                            size: self.size
-#                            pos: self.pos
-#                    background_color: 0, 0, 0, 0
-#                    size_hint: None, None
-#                    filename: './icons/user.svg'
-#                    scale: 2
                 Button:
                     canvas.before:
                         Color:
@@ -138,11 +61,14 @@
                     on_press: root.manager.current = 'login'
         ScreenManager:
             id: content_manager
+#            LiveOrdersScreen:
+#                id: live_orders
+#                screen_manager: content_manager
             ActiveOrdersScreen:
                 id: active_orders
                 screen_manager: content_manager
-            LiveOrdersScreen:
-                id: live_orders
+            WorkingOrdersScreen:
+                id: working_orders
                 screen_manager: content_manager
             PreviousOrdersScreen:
                 id: previous_orders

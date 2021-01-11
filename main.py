@@ -31,7 +31,6 @@ class Textnibble(App):
         sm = ScreenManager(transition=FadeTransition())
         sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(Mainscreen(name='main'))
-
         return sm
 
 

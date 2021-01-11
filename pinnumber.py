@@ -17,19 +17,19 @@ class PinNumber(Widget):
     def add_digit(self, val: int):
 
         if not self.is_complete:
-            print('adding digi')
+            # print('adding digi')
             self.pin.append(val)
             self.is_empty = False
-        else:
-            print('NOT adding digi')
+        # else:
+        #     print('NOT adding digi')
         self.is_complete = not (len(self.pin) < self.max_size)
-        print(f"\nPin length: {len(self.pin)}")
-        print(f"Max Size: {self.max_size}")
-        print(f"is_complete: {self.is_complete}")
+        # print(f"\nPin length: {len(self.pin)}")
+        # print(f"Max Size: {self.max_size}")
+        # print(f"is_complete: {self.is_complete}")
         self.dispatch('on_add_digit')
 
     def clear(self):
-        print("clearing pin")
+        # print("clearing pin")
         self.pin.clear()
         self.is_complete = False
         self.dispatch('on_clear')

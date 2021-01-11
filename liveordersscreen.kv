@@ -5,7 +5,7 @@
 
 
 <LiveOrdersScreen>:
-
+    orders:
     canvas.before:
         Color:
             rgb: C('#18181B')
@@ -14,25 +14,12 @@
             size: self.size
     name: 'live_orders'
     ScrollView:
-#        canvas.before:
-#            Color:
-#                rgb: C('#00FF00')
-#            Rectangle:
-#                pos: self.pos
-#                size: self.size
         size_hint: None, 1
         pos_hint: {"center_x": .5}
         width: main_layout.minimum_width
         do_scroll_x: False
         do_scroll_y: True
         GridLayout:
-#            on_touch_down: root.add_order()
-#            canvas.before:
-#                Color:
-#                    rgb: C('#0000FF')
-#                Rectangle:
-#                    pos: self.pos
-#                    size: self.size
             id: main_layout
             halign: 'center'
             spacing: 96
@@ -42,16 +29,3 @@
             width: self.minimum_width
             pos_hint: {"center_x": .1}
             cols: int((root.width-144) / 384)
-    #        orientation: 'vertical'
-#            Order:
-#                accent_color: C('#4ADE80')
-#            Order:
-#                on_press: root.screen_manager.current = 'order_detail'
-#            Order:
-#                on_press: root.screen_manager.current = 'order_detail'
-#                accent_color: C('#FBBF24')
-#            Order:
-#                on_press: root.screen_manager.current = 'order_detail'
-#            Order:
-#                on_press: root.screen_manager.current = 'order_detail'
-#                accent_color: C('#F87171')
