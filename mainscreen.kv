@@ -15,9 +15,6 @@
 #:include alertbutton.kv
 #:import OrdersScreenManager ordersscreenmanager
 
-<AlertButton>
-    size_hint: (.1, 1) if (self.badge_total > 0) else (0, 1)
-    opacity: 1 if (self.badge_total > 0) else 0
 <MainScreen>:
 #    content_manager: content_manager
     BoxLayout:
@@ -37,18 +34,27 @@
                     id: alert_button_urgent
                     on_press: content_manager.current = 'urgent_orders'
                     button_text: '[i]Action Needed[/i]'
+                    badge_color: C('#DC2626')
+                    button_color: C('#DC2626')
+                    urgent: True
                     badge_total: len(content_manager.order_manager.urgent_orders)
                 AlertButton:
                     on_press: content_manager.current = 'working_orders'
+                    button_color: C('#EAB308')
+                    badge_color: C('#EAB308')
                     button_text: 'Working Orders'
                     badge_total: len(content_manager.order_manager.working_orders)
                 AlertButton:
                     on_press: content_manager.current = 'awaiting_pickup'
+                    button_color: C('#71717A')
+                    badge_color: C('#71717A')
                     button_text: 'Awaiting Pickup'
                     badge_total: len(content_manager.order_manager.awaiting_pickup_orders)
                 AlertButton:
                     on_press: content_manager.current = 'idle_orders'
                     button_text: 'Idle Orders'
+                    button_color: C('#71717A')
+                    badge_color: C('#71717A')
                     badge_total: len(content_manager.order_manager.idle_orders)
                 AlertButton:
                     on_press: content_manager.current = 'fulfilled'

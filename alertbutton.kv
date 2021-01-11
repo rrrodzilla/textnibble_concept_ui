@@ -5,6 +5,10 @@
 <AlertButton>:
     badge_total:
     button_text:
+    button_color:
+    badge_color:
+#    size_hint: (.1, 1) if (self.badge_total > 0) else (0, 1)
+#    opacity: 1 if (self.badge_total > 0) else 0
     FloatLayout:
 #        canvas.before:
 #            Color:
@@ -14,22 +18,23 @@
 #                pos: self.pos
         pos_hint: {"center_y": .5, "center_x": .5}
         Button:
+            id: btn_base
 #            canvas.before:
 #                Color:
-#                    rgb: C('#FF0000')
+#                    rgb: C('#0000FF')
 #                Rectangle:
 #                    size: self.size
 #                    pos: self.pos
             size_hint: 1, 1
-            width: 100
+#            width: 100
             height: 20
             id: button_main
             text: '[i]'+ root.button_text + '[/i]'
             font_name: 'Inter'
             bold: True
-            font_size: 12
+            font_size: 16
             pos_hint: {"center_y": .5, "center_x": .5}
-            color: C('#F87171')
+            color: root.button_color
             background_normal:''
             background_color: 0,0,0,0
             on_press: root.dispatch('on_press')
@@ -38,16 +43,17 @@
             id: alert
             canvas.before:
                 Color:
-                    rgb: C('#F87171')
+                    rgb: root.badge_color
                 Ellipse:
                     size: self.size
                     pos: self.pos
-            pos_hint: {"center_y": .70, "center_x": .80}
+            pos_hint: {"center_y": .74, "center_x": .85}
             size_hint: None, None
             color: C('#27272A')
             font_name: 'Inter'
             bold: True
-            height: 24
-            width: 24
+            height: 0
+            width: 0
+            opacity: 0
             font_size: 14
             text: f'{root.badge_total}'
