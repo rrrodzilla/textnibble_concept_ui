@@ -68,7 +68,7 @@ class Order(ButtonBehavior, BoxLayout):
 
             # self.accent_color = c('#52525B')
 
-        print(order.status.name)
+        # print(order.status.name)
 
     def on_press(self):
         pass

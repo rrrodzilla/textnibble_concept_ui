@@ -13,9 +13,12 @@
 #:include workingordersscreen.kv
 #:import AlertButton alertbutton
 #:include alertbutton.kv
+#:import OrdersScreenManager ordersscreenmanager
 
-
+<AlertButton>
+    size_hint: .1, 1
 <MainScreen>:
+#    content_manager: content_manager
     BoxLayout:
         orientation: 'vertical'
         BoxLayout:
@@ -30,15 +33,34 @@
                     size_hint: .15, 1
                     allow_stretch: True
                 AlertButton:
-                    size_hint: .15, 1
-                    on_press: content_manager.current = 'active_orders'
+                    id: alert_button_urgent
+                    on_press: content_manager.current = 'urgent_orders'
                     button_text: '[i]Action Needed[/i]'
-                    alert_text: f'{active_orders.order_total}'
+                    badge_total: len(content_manager.order_manager.urgent_orders)
                 AlertButton:
-                    size_hint: .15, 1
                     on_press: content_manager.current = 'working_orders'
                     button_text: 'Working Orders'
-                    alert_text: f'{working_orders.order_total}'
+                    badge_total: len(content_manager.order_manager.working_orders)
+                AlertButton:
+                    on_press: content_manager.current = 'awaiting_pickup'
+                    button_text: 'Awaiting Pickup'
+                    badge_total: len(content_manager.order_manager.awaiting_pickup_orders)
+                AlertButton:
+                    on_press: content_manager.current = 'idle_orders'
+                    button_text: 'Idle Orders'
+                    badge_total: len(content_manager.order_manager.idle_orders)
+                AlertButton:
+                    on_press: content_manager.current = 'fulfilled'
+                    button_text: 'Past Orders'
+                    badge_total: len(content_manager.order_manager.fulfilled)
+#                AlertButton:
+#                    on_press: content_manager.current = 'all_orders'
+#                    button_text: 'All Orders'
+#                    badge_total: len(content_manager.order_manager.all_orders)
+                AlertButton:
+                    on_press: content_manager.order_manager.add_dummy_order()
+                    button_text: 'Add Order'
+                    badge_total: 0
             AnchorLayout:
                 anchor_y: 'center'
                 anchor_x: 'center'
@@ -59,18 +81,41 @@
                     height: 48
                     width: 48
                     on_press: root.manager.current = 'login'
-        ScreenManager:
+        OrdersScreenManager:
             id: content_manager
-#            LiveOrdersScreen:
-#                id: live_orders
-#                screen_manager: content_manager
-            ActiveOrdersScreen:
-                id: active_orders
-                screen_manager: content_manager
-            WorkingOrdersScreen:
+            LiveOrdersScreen:
+                id: live_orders
+                name: 'urgent_orders'
+                orders: self.manager.order_manager.urgent_orders
+            LiveOrdersScreen:
                 id: working_orders
-                screen_manager: content_manager
-            PreviousOrdersScreen:
-                id: previous_orders
+                name: 'working_orders'
+                orders: self.manager.order_manager.working_orders
+            LiveOrdersScreen:
+                id: awaiting_pickup
+                name: 'awaiting_pickup'
+                orders: self.manager.order_manager.awaiting_pickup_orders
+            LiveOrdersScreen:
+                id: idle_orders
+                name: 'idle_orders'
+                orders: self.manager.order_manager.idle_orders
+            LiveOrdersScreen:
+                id: fulfilled
+                name: 'fulfilled'
+                orders: self.manager.order_manager.fulfilled
+#            LiveOrdersScreen:
+#                id: all_orders
+#                name: 'all_orders'
+#                orders: self.manager.order_manager.all_orders
+#                content_manager.on_orders_loaded: print(f'orders loaded')
+
+#            ActiveOrdersScreen:
+#                id: active_orders
+#                screen_manager: content_manager
+#            WorkingOrdersScreen:
+#                id: working_orders
+#                screen_manager: content_manager
+#            PreviousOrdersScreen:
+#                id: previous_orders
             OrderDetailScreen:
                 id: order_detail

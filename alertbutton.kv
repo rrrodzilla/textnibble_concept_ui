@@ -3,7 +3,7 @@
 
 
 <AlertButton>:
-    alert_text:
+    badge_total:
     button_text:
     FloatLayout:
 #        canvas.before:
@@ -26,7 +26,8 @@
             id: button_main
             text: '[i]'+ root.button_text + '[/i]'
             font_name: 'Inter'
-            font_size: 18
+            bold: True
+            font_size: 12
             pos_hint: {"center_y": .5, "center_x": .5}
             color: C('#F87171')
             background_normal:''
@@ -49,4 +50,4 @@
             height: 24
             width: 24
             font_size: 14
-            text: root.alert_text
+            text: f'{root.badge_total}'
