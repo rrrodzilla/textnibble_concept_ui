@@ -6,8 +6,8 @@ from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.screenmanager import ScreenManager, FadeTransition
 
-from loginscreen import LoginScreen
-from mainscreen import Mainscreen
+from screens.loginscreen import LoginScreen
+from screens.mainscreen import Mainscreen
 
 kivy.require('2.0.0')
 

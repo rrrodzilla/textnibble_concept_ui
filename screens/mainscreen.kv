@@ -1,19 +1,13 @@
 #:kivy 2.0.0
 #:import RoundedRectangle kivy.graphics
 #:import C kivy.utils.get_color_from_hex
-#:import LiveOrdersScreen liveordersscreen
-#:include liveordersscreen.kv
-#:import PreviousOrdersScreen previousordersscreen
-#:include previousordersscreen.kv
-#:import OrderDetailScreen orderdetailscreen
-#:include orderdetailscreen.kv
-#:import ActiveOrdersScreen activeordersscreen
-#:include activeordersscreen.kv
-#:import WorkingOrdersScreen workingordersscreen
-#:include workingordersscreen.kv
+#:import LiveOrdersScreen screens.liveordersscreen
+#:include ./screens/liveordersscreen.kv
+#:import OrderDetailScreen screens.orderdetailscreen
+#:include ./screens/orderdetailscreen.kv
+#:import OrdersScreenManager screens.ordersscreenmanager
 #:import AlertButton alertbutton
 #:include alertbutton.kv
-#:import OrdersScreenManager ordersscreenmanager
 
 <MainScreen>:
 #    content_manager: content_manager
