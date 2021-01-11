@@ -34,7 +34,7 @@ class OrderManager(Widget):
         self.register_event_type('on_loaded')
         self.register_event_type('on_updated')
         self.register_event_type('on_clear')
-        self.load_dummy_orders()
+        # self.load_dummy_orders()
 
     def on_updated(self, *args):
         pass

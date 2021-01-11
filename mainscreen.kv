@@ -16,7 +16,8 @@
 #:import OrdersScreenManager ordersscreenmanager
 
 <AlertButton>
-    size_hint: .1, 1
+    size_hint: (.1, 1) if (self.badge_total > 0) else (0, 1)
+    opacity: 1 if (self.badge_total > 0) else 0
 <MainScreen>:
 #    content_manager: content_manager
     BoxLayout:
@@ -60,7 +61,7 @@
                 AlertButton:
                     on_press: content_manager.order_manager.add_dummy_order()
                     button_text: 'Add Order'
-                    badge_total: 0
+                    badge_total: 1
             AnchorLayout:
                 anchor_y: 'center'
                 anchor_x: 'center'
