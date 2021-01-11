@@ -58,10 +58,12 @@
 #                    on_press: content_manager.current = 'all_orders'
 #                    button_text: 'All Orders'
 #                    badge_total: len(content_manager.order_manager.all_orders)
-                AlertButton:
-                    on_press: content_manager.order_manager.add_dummy_order()
-                    button_text: 'Add Order'
-                    badge_total: 1
+            Button:
+                on_press: content_manager.order_manager.add_dummy_order()
+                text: 'Add Order'
+                size_hint: None, None
+                pos_hint: {"center_y": .5}
+                size: [96, 64]
             AnchorLayout:
                 anchor_y: 'center'
                 anchor_x: 'center'
