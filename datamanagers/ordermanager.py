@@ -29,6 +29,11 @@ class OrderManager(Widget):
     awaiting_pickup_orders = ListProperty(rebind=True)
     fulfilled = ListProperty(rebind=True)
     current_order = ObjectProperty(orderObj())
+    food_word_list = [
+        'latte', 'muffin', 'cappuccino',
+        'breakfast sandwich', 'iced tea', 'chocolate chip cookie',
+        'salad', 'artichoke panini', 'iced latte',
+        'chia pudding', 'avocado toast', 'drip coffee', 'bowl of oatmeal']
 
     def __init__(self, **kwargs):
         super(OrderManager, self).__init__(**kwargs)
@@ -53,7 +58,8 @@ class OrderManager(Widget):
     def update_order(self, order):
         update_index = next(i for i, x in enumerate(self.all_orders) if x.id == order.id)
         print(f'found index {update_index} for id: {order.id} with customer {order.customer_name}')
-        print(f'attempting to update order {order.id} for {order.customer_name}')
+        print(f'attempting to update order {order.id} for {order.customer_name} with status {order.status.name} from '
+              f'status {self.all_orders[next(i for i, x in enumerate(self.all_orders) if x.id == order.id)].status.name}')
         self.all_orders[next(i for i, x in enumerate(self.all_orders) if x.id == order.id)] = order
 
     def on_all_orders(self, instance, value):
@@ -64,6 +70,11 @@ class OrderManager(Widget):
         self.awaiting_pickup_orders = OrderFilterAwaitingPickup().Filter(value)
         self.fulfilled = OrderFilterFulfilled().Filter(value)
 
+    def refresh_orders(self, instance, value):
+        print('refreshing orders')
+        prop = self.property('all_orders')
+        prop.dispatch(self)
+
     def add_dummy_order(self):
         # print('adding order')
         new_order = orderObj()
@@ -71,10 +82,13 @@ class OrderManager(Widget):
         new_order.customer_name = fake.name()
         # new_order.status = OrderStatus(random.randint(OrderStatus.NEW.value, OrderStatus.FULFILLED.value))
         if new_order.status is OrderStatus.NEW:
-            new_order.time = datetime.now(tz=timezone.utc)
+            new_order.time = datetime.now(tz=timezone.utc) + relativedelta(minutes=-random.randint(0, 2))
         else:
             new_order.time = datetime.now(tz=timezone.utc) + relativedelta(minutes=-random.randint(2, 15))
-        new_order.order_message = fake.sentence()
+        new_order.order_message = f'{random.randint(1, 2)} {fake.word(ext_word_list=self.food_word_list)} and ' \
+                                  f'{random.randint(1, 2)} {fake.word(ext_word_list=self.food_word_list)}'
+        new_order.bind(on_updated=self.refresh_orders)
+
         self.all_orders.append(new_order)
 
     def load_dummy_orders(self):

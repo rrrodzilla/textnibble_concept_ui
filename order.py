@@ -23,34 +23,35 @@ class Order(ButtonBehavior, BoxLayout):
     customer_name = StringProperty()
     minutes = StringProperty()
     ago = StringProperty()
+    current_order = ObjectProperty(rebind=True)
 
     def __init__(self, order: OrderModel, **kwargs):
         super(Order, self, **kwargs).__init__(**kwargs)
 
-        self._order = order
+        self.current_order = order
         self.order_message = order.order_message
         self.customer_name = order.customer_name
         if order.status is OrderStatus.NEW:
             self.ids.status_label.text = "NEW"
             self.accent_color = c('#DC2626')
         if order.status is OrderStatus.PAID:
-            self.ids.status_label.text = "READY FOR KITCHEN"
+            self.ids.status_label.text = "READY   FOR   KITCHEN"
             self.accent_color = c('#DC2626')
         self.accent_darker = c('#EA580C')
         if order.status is OrderStatus.UPDATED:
-            self.ids.status_label.text = "CUSTOMER REPLIED"
+            self.ids.status_label.text = "CUSTOMER   REPLIED"
             self.accent_color = c('#DC2626')
         if order.status is OrderStatus.AWAITING_REPLY:
-            self.ids.status_label.text = "AWAITING REPLY"
-            self.accent_color = c('#D4D4D8')
+            self.ids.status_label.text = "AWAITING   REPLY"
+            self.accent_color = c('#71717A')
         if order.status is OrderStatus.AWAITING_PICKUP:
-            self.ids.status_label.text = "AWAITING PICKUP"
+            self.ids.status_label.text = "AWAITING   PICKUP"
             self.accent_color = c('#D4D4D8')
         if order.status is OrderStatus.AWAITING_PAYMENT:
-            self.ids.status_label.text = "AWAITING PAYMENT"
+            self.ids.status_label.text = "AWAITING   PAYMENT"
             self.accent_darker = c('#E5E5E5')
         if order.status is OrderStatus.FULFILLED:
-            self.ids.status_label.text = "FULFILLED"
+            self.ids.status_label.text = "COMPLETED"
             # self.accent_color = c('#84CC16')
             self.accent_color = c('#4D7C0F')
         if order.status is OrderStatus.WORKING:
@@ -60,14 +61,12 @@ class Order(ButtonBehavior, BoxLayout):
         Clock.schedule_interval(self.set_age, 1)
 
     def set_age(self, instance):
-        dt = self._order.time
+        dt = self.current_order.time
         adt = arrow.Arrow.fromdatetime(dt)
-        self.minutes, self.ago = arrow.Arrow.fromdatetime(self._order.time).humanize().split(' ', 1)
+        self.minutes, self.ago = arrow.Arrow.fromdatetime(self.current_order.time).humanize().split(' ', 1)
         if not IsInt(self.minutes):
-            self.minutes = ''
-            self.ago = '[size=24][b]just\nnow[/b][/size]'
-
-        pass
+            self.ago = f'[size=24][b]{self.minutes}\n{self.ago}[/b][/size]'
 
     def on_press(self):
+        print(f'Pressed {self.current_order.customer_name}\n')
         pass

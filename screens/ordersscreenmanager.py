@@ -8,14 +8,17 @@ from screens.orderdetailscreen import OrderDetailScreen
 
 
 class OrdersScreenManager(ScreenManager):
-    order_manager = ObjectProperty(OrderManager())
+    order_manager = ObjectProperty(OrderManager(), rebind=True)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
     def edit_order(self, order: Order):
-        detail_screen = OrderDetailScreen(order)
-        self.add_widget(detail_screen)
+        print(f'Editing order for {order.customer_name}')
+        self.order_manager.current_order = order
+        # detail_screen = OrderDetailScreen()
+        # detail_screen.current_order = order
+        # self.add_widget(detail_screen)
         self.transition = RiseInTransition()
         self.current = 'order_detail'
 

@@ -55,3 +55,10 @@
             SimpleButton:
                 text: 'Picked Up'
                 on_press:root.update_order_status(status.FULFILLED)
+            Label:
+                text: root.current_order.customer_name if (root.current_order is not None and root.current_order.customer_name) else ''
+            Label:
+                text: root.current_order.order_message if (root.current_order is not None and root.current_order.order_message) else ''
+            Label:
+                text: root.current_order.status.name if (root.current_order is not None and root.current_order.status) else ''
+
