@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 
 from dateutil.relativedelta import relativedelta
 from faker import Faker
-from kivy.properties import ListProperty, NumericProperty
+from kivy.properties import ListProperty, NumericProperty, ObjectProperty
 from kivy.uix.widget import Widget
 
 from datamanagers.orderfilterabstract import OrderFilterAbstract
@@ -28,6 +28,7 @@ class OrderManager(Widget):
     idle_orders = ListProperty(rebind=True)
     awaiting_pickup_orders = ListProperty(rebind=True)
     fulfilled = ListProperty(rebind=True)
+    current_order = ObjectProperty(orderObj())
 
     def __init__(self, **kwargs):
         super(OrderManager, self).__init__(**kwargs)
@@ -49,6 +50,12 @@ class OrderManager(Widget):
     def on_loaded(self, *args):
         pass
 
+    def update_order(self, order):
+        update_index = next(i for i, x in enumerate(self.all_orders) if x.id == order.id)
+        print(f'found index {update_index} for id: {order.id} with customer {order.customer_name}')
+        print(f'attempting to update order {order.id} for {order.customer_name}')
+        self.all_orders[next(i for i, x in enumerate(self.all_orders) if x.id == order.id)] = order
+
     def on_all_orders(self, instance, value):
         self.all_orders = value
         self.urgent_orders = OrderFilterActive().Filter(value)
@@ -60,8 +67,9 @@ class OrderManager(Widget):
     def add_dummy_order(self):
         # print('adding order')
         new_order = orderObj()
+        new_order.id = str(len(self.all_orders))
         new_order.customer_name = fake.name()
-        new_order.status = OrderStatus(random.randint(OrderStatus.NEW.value, OrderStatus.FULFILLED.value))
+        # new_order.status = OrderStatus(random.randint(OrderStatus.NEW.value, OrderStatus.FULFILLED.value))
         if new_order.status is OrderStatus.NEW:
             new_order.time = datetime.now(tz=timezone.utc)
         else:

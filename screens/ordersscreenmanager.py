@@ -2,6 +2,8 @@ from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager
 
 from datamanagers.ordermanager import OrderManager
+from models.order import Order
+from screens.orderdetailscreen import OrderDetailScreen
 
 
 class OrdersScreenManager(ScreenManager):
@@ -9,13 +11,12 @@ class OrdersScreenManager(ScreenManager):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.register_event_type('on_orders_loaded')
-        self.order_manager.bind(on_updated=lambda mgr: self.update_children())
 
-    def on_orders_loaded(self, *args):
-        # print(f'{len(self.order_manager.orders())} orders have been loaded')
-        pass
+    def edit_order(self, order: Order):
+        detail_screen = OrderDetailScreen(order)
+        self.add_widget(detail_screen)
+        self.current = 'order_detail'
 
-    def update_children(self):
-        self.canvas.ask_update()
-        print('updating children')
+    def update_order(self, order):
+        self.order_manager.update_order(order)
+

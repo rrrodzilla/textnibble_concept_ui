@@ -106,19 +106,6 @@
                 id: fulfilled
                 name: 'fulfilled'
                 orders: self.manager.order_manager.fulfilled
-#            LiveOrdersScreen:
-#                id: all_orders
-#                name: 'all_orders'
-#                orders: self.manager.order_manager.all_orders
-#                content_manager.on_orders_loaded: print(f'orders loaded')
-
-#            ActiveOrdersScreen:
-#                id: active_orders
-#                screen_manager: content_manager
-#            WorkingOrdersScreen:
-#                id: working_orders
-#                screen_manager: content_manager
-#            PreviousOrdersScreen:
-#                id: previous_orders
-            OrderDetailScreen:
-                id: order_detail
+#            OrderDetailScreen:
+#                id: order_detail
+#                current_order: self.manager.order_manager.current_order

@@ -29,7 +29,7 @@ class AlertButton(FloatLayout):
         pass
 
     def on_badge_total(self, instance, value):
-        print(f'updating badge to: {value} for {self.button_text}')
+        # print(f'updating badge to: {value} for {self.button_text}')
         self.ids.alert.text = str(value)
         if value > 0:
             # animate button fly out
@@ -47,7 +47,7 @@ class AlertButton(FloatLayout):
         # animate badge pop up
         if self.badgeEvent is not None:
             self.badgeEvent.cancel()
-        print('animating badge')
+        # print('animating badge')
         self.ids.alert.size = (0, 0)
         self.ids.alert.opacity = 0
         badge_anim = Animation(size=(24, 24), t='out_bounce', duration=.3)
