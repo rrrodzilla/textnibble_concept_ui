@@ -1,3 +1,4 @@
+from kivy.clock import Clock
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.boxlayout import BoxLayout
@@ -25,14 +26,10 @@ class Order(ButtonBehavior, BoxLayout):
 
     def __init__(self, order: OrderModel, **kwargs):
         super(Order, self, **kwargs).__init__(**kwargs)
+
+        self._order = order
         self.order_message = order.order_message
         self.customer_name = order.customer_name
-        dt = order.time
-        adt = arrow.Arrow.fromdatetime(dt)
-        self.minutes, self.ago = arrow.Arrow.fromdatetime(order.time).humanize().split(' ', 1)
-        if not IsInt(self.minutes):
-            self.minutes = ''
-            self.ago = '[size=24][b]just\nnow[/b][/size]'
         if order.status is OrderStatus.NEW:
             self.ids.status_label.text = "NEW"
             self.accent_color = c('#DC2626')
@@ -59,10 +56,18 @@ class Order(ButtonBehavior, BoxLayout):
         if order.status is OrderStatus.WORKING:
             self.ids.status_label.text = "KITCHEN"
             self.accent_color = c('#EAB308')
+        self.set_age(self)
+        Clock.schedule_interval(self.set_age, 1)
 
-            # self.accent_color = c('#52525B')
+    def set_age(self, instance):
+        dt = self._order.time
+        adt = arrow.Arrow.fromdatetime(dt)
+        self.minutes, self.ago = arrow.Arrow.fromdatetime(self._order.time).humanize().split(' ', 1)
+        if not IsInt(self.minutes):
+            self.minutes = ''
+            self.ago = '[size=24][b]just\nnow[/b][/size]'
 
-        # print(order.status.name)
+        pass
 
     def on_press(self):
         pass
