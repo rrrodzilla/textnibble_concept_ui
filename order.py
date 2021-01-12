@@ -34,37 +34,31 @@ class Order(ButtonBehavior, BoxLayout):
             self.minutes = ''
             self.ago = '[size=24][b]just\nnow[/b][/size]'
         if order.status is OrderStatus.NEW:
-            self.ids.status_label.text = "NEW ORDER"
-            self.accent_color = c('#34D399')
-            self.accent_darker = c('#059669')
+            self.ids.status_label.text = "NEW"
+            self.accent_color = c('#DC2626')
         if order.status is OrderStatus.PAID:
-            self.ids.status_label.text = "PAYMENT RECEIVED"
-            self.accent_color = c('#FB923C')
+            self.ids.status_label.text = "READY FOR KITCHEN"
+            self.accent_color = c('#DC2626')
         self.accent_darker = c('#EA580C')
         if order.status is OrderStatus.UPDATED:
-            self.ids.status_label.text = "UPDATED"
-            self.accent_color = c('#FB923C')
-            self.accent_darker = c('#EA580C')
+            self.ids.status_label.text = "CUSTOMER REPLIED"
+            self.accent_color = c('#DC2626')
         if order.status is OrderStatus.AWAITING_REPLY:
             self.ids.status_label.text = "AWAITING REPLY"
             self.accent_color = c('#D4D4D8')
-            self.accent_darker = c('#E5E5E5')
         if order.status is OrderStatus.AWAITING_PICKUP:
             self.ids.status_label.text = "AWAITING PICKUP"
             self.accent_color = c('#D4D4D8')
-            self.accent_darker = c('#E5E5E5')
         if order.status is OrderStatus.AWAITING_PAYMENT:
             self.ids.status_label.text = "AWAITING PAYMENT"
             self.accent_darker = c('#E5E5E5')
-            self.accent_color = c('#D4D4D8')
         if order.status is OrderStatus.FULFILLED:
             self.ids.status_label.text = "FULFILLED"
             # self.accent_color = c('#84CC16')
             self.accent_color = c('#4D7C0F')
-            self.accent_darker = c('#4D7C0F')
         if order.status is OrderStatus.WORKING:
-            self.ids.status_label.text = "WORKING"
-            self.accent_color = c('#D4D4D8')
+            self.ids.status_label.text = "KITCHEN"
+            self.accent_color = c('#EAB308')
 
             # self.accent_color = c('#52525B')
 

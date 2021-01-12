@@ -2,6 +2,9 @@
 #:import RoundedRectangle kivy.graphics
 #:import C kivy.utils.get_color_from_hex
 #:import LiveOrdersScreen screens.liveordersscreen
+#:import FallOutTransition kivy.uix.screenmanager.FallOutTransition
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import RiseInTransition kivy.uix.screenmanager.RiseInTransition
 #:include ./screens/liveordersscreen.kv
 #:import OrderDetailScreen screens.orderdetailscreen
 #:include ./screens/orderdetailscreen.kv
@@ -26,32 +29,34 @@
                     allow_stretch: True
                 AlertButton:
                     id: alert_button_urgent
-                    on_press: content_manager.current = 'urgent_orders'
+                    on_press: content_manager.nav('urgent_orders')
                     button_text: '[i]Action Needed[/i]'
                     badge_color: C('#DC2626')
                     button_color: C('#DC2626')
                     urgent: True
                     badge_total: len(content_manager.order_manager.urgent_orders)
                 AlertButton:
-                    on_press: content_manager.current = 'working_orders'
+                    on_press: content_manager.nav('working_orders')
                     button_color: C('#EAB308')
                     badge_color: C('#EAB308')
                     button_text: 'Working Orders'
                     badge_total: len(content_manager.order_manager.working_orders)
                 AlertButton:
-                    on_press: content_manager.current = 'awaiting_pickup'
+                    on_press: content_manager.nav('awaiting_pickup')
                     button_color: C('#71717A')
                     badge_color: C('#71717A')
                     button_text: 'Awaiting Pickup'
                     badge_total: len(content_manager.order_manager.awaiting_pickup_orders)
                 AlertButton:
-                    on_press: content_manager.current = 'idle_orders'
+                    on_press: content_manager.nav('idle_orders')
                     button_text: 'Idle Orders'
                     button_color: C('#71717A')
                     badge_color: C('#71717A')
                     badge_total: len(content_manager.order_manager.idle_orders)
                 AlertButton:
-                    on_press: content_manager.current = 'fulfilled'
+                    on_press: content_manager.nav('fulfilled')
+                    button_color: C('#71717A')
+                    badge_color: C('#71717A')
                     button_text: 'Past Orders'
                     badge_total: len(content_manager.order_manager.fulfilled)
 #                AlertButton:
@@ -86,6 +91,7 @@
                     on_press: root.manager.current = 'login'
         OrdersScreenManager:
             id: content_manager
+            transition: RiseInTransition()
             LiveOrdersScreen:
                 id: live_orders
                 name: 'urgent_orders'

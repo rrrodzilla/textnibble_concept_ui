@@ -29,25 +29,26 @@
 #                Rectangle:
 #                    size: self.size
 #                    pos: self.pos
-            spacing: 48
-            size_hint: 1, None
+            spacing: 24
+            orientation: 'vertical'
+            size_hint: 1, .5
             minimum_width: self.width
             pos_hint: {'center_y': .5}
-            SimpleButton:
-                text: 'Send Quote'
-                on_press:root.update_order_status(status.AWAITING_PAYMENT)
             SimpleButton:
                 text: 'Send Message'
                 on_press:root.update_order_status(status.AWAITING_REPLY)
             SimpleButton:
-                text: 'Send to Kitchen'
-                on_press:root.update_order_status(status.WORKING)
+                text: 'Receive Update'
+                on_press:root.update_order_status(status.UPDATED)
+            SimpleButton:
+                text: 'Send Quote'
+                on_press:root.update_order_status(status.AWAITING_PAYMENT)
             SimpleButton:
                 text: 'Receive Payment'
                 on_press:root.update_order_status(status.PAID)
             SimpleButton:
-                text: 'Receive Update'
-                on_press:root.update_order_status(status.UPDATED)
+                text: 'Send to Kitchen'
+                on_press:root.update_order_status(status.WORKING)
             SimpleButton:
                 text: 'Finish Working'
                 on_press:root.update_order_status(status.AWAITING_PICKUP)
