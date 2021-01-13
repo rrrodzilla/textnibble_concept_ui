@@ -5,6 +5,11 @@
 <MessageLabel@Label>:
     font_name: 'Inter'
     markup: True
+    halign: 'left'
+    valign: 'top'
+    size_hint: None, 1
+    size: self.texture_size
+    font_size: 12
 <ConversationMessageWidget>:
 #    canvas.before:
 #        Color:
@@ -37,6 +42,7 @@
             pos_hint: {'center_x': .5, 'center_y': .5}
             size_hint: 1, 1
             text_size: self.size
+            font_size: 16
             color: C('#F5F5F5') if not root.conversation.is_business_response else C('#A3A3A3')
             halign: 'left'
             valign: 'top'
@@ -45,7 +51,7 @@
         BoxLayout:
 #            canvas.before:
 #                Color:
-#                    rgb: C('#00FF00')
+#                    rgb: C('#0000FF')
 #                Rectangle:
 #                    size: self.size
 #                    pos: self.pos
@@ -54,22 +60,17 @@
             width: self.minimum_width
             spacing: 4
             MessageLabel:
+#                canvas.before:
+#                    Color:
+#                        rgb: C('#FF0000')
+#                    Rectangle:
+#                        size: self.size
+#                        pos: self.pos
                 id: msg_sender
                 text: f'[i]{root.conversation.sender}[/i]'
                 color: C('#F5F5F5') if not root.conversation.is_business_response else C('#737373')
 #                halign: 'right' if not root.conversation.is_business_response else 'left'
-                halign: 'left'
-                valign: 'top'
-                text_size: self.size
-                size_hint: None, 1
-                font_size: 12
             MessageLabel:
                 id: msg_time
-                text: ' - a few minutes ago'
-#                text: f'[i]{root.humanized_time}[/i]'
+                text: f'[i] - {root.humanized_time}[/i]'
                 color: C('#F5F5F5') if not root.conversation.is_business_response else C('#737373')
-                halign: 'left'
-                valign: 'top'
-                size_hint: None, 1
-                text_size: self.size
-                font_size: 12

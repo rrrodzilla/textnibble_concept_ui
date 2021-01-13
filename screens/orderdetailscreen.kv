@@ -40,7 +40,23 @@
                 id: conversation_layout
                 orientation: 'vertical'
                 size_hint: .25, 1
-                padding:  24
+                pos_hint: {'center_y': .5}
+                padding:  24, 0, 24, 24
+                Label:
+#                    canvas.before:
+#                        Color:
+#                            rgb: C('#00FF00')
+#                        Rectangle:
+#                            size: self.size
+#                            pos: self.pos
+                    text: '[i]Conversation[/i]'
+                    color: C('#E5E5E5')
+                    font_name: 'Inter'
+                    font_size: 22
+                    markup: True
+                    size_hint: 1, None
+#                    size: self.texture_size
+                    height: 96
                 ScrollView:
                     pos_hint: {"center_x": .5}
                     width: conversation_layout.minimum_width
@@ -72,12 +88,14 @@
                     orientation: 'horizontal'
                     spacing: 8
                     TextInput:
+                        id: msg_input
 #                        canvas.before:
 #                            Color:
 #                                rgb: C('#00FF00')
 #                            Rectangle:
 #                                size: self.size
 #                                pos: self.pos
+                        font_name: 'Inter'
                         pos_hint: {"center_y": .5}
                         size_hint: .7, 1
                     Button:
@@ -88,6 +106,7 @@
 #                                size: self.size
 #                                pos: self.pos
                         pos_hint: {"center_y": .5}
+                        on_press:root.send_order_message()
                         size_hint: .3, 1
                         text: 'Send'
             BoxLayout:
@@ -115,9 +134,9 @@
 #            padding: 24
 #            minimum_width: self.width
 #            pos_hint: {'center_y': 1, 'center_x': .5}
-#            SimpleButton:
-#                text: 'Message'
-#                on_press:root.update_order_status(status.AWAITING_REPLY)
+##            SimpleButton:
+##                text: 'Message'
+##                on_press:root.update_order_status(status.AWAITING_REPLY)
 #            SimpleButton:
 #                text: 'Replied'
 #                on_press:root.update_order_status(status.UPDATED)

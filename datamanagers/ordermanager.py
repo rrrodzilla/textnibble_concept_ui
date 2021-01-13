@@ -83,11 +83,12 @@ class OrderManager(Widget):
         new_order.customer_name = fake.name()
         # new_order.status = OrderStatus(random.randint(OrderStatus.NEW.value, OrderStatus.FULFILLED.value))
         if new_order.status is OrderStatus.NEW:
-            new_order.time = datetime.now(tz=timezone.utc) + relativedelta(minutes=-random.randint(0, 2))
+            new_order.time = datetime.now(tz=timezone.utc) + relativedelta(minutes=-random.randint(2, 3))
         else:
             new_order.time = datetime.now(tz=timezone.utc) + relativedelta(minutes=-random.randint(2, 15))
         msg = ConversationMessage()
         msg.id = msg.uid
+        msg.send_time = new_order.time
         msg.sender = new_order.customer_name
         msg.message = f'{random.randint(1, 2)} {fake.word(ext_word_list=self.food_word_list)} and ' \
                                   f'{random.randint(1, 2)} {fake.word(ext_word_list=self.food_word_list)}'
@@ -95,12 +96,21 @@ class OrderManager(Widget):
         new_order.conversation.append(msg)
 
         biz_response = ConversationMessage()
+        biz_response.send_time = msg.send_time + relativedelta(seconds=+45)
         biz_response.id = biz_response.uid
         biz_response.sender = 'Jibe Espresso Bar - Roland'
         biz_response.message = 'Hi! What size would you like?'
         biz_response.is_business_response = True
 
         new_order.conversation.append(biz_response)
+
+        reply = ConversationMessage()
+        reply.id = reply.uid
+        reply.send_time = biz_response.send_time + relativedelta(seconds=+45)
+        reply.sender = new_order.customer_name
+        reply.message = "large thx"
+
+        new_order.conversation.append(reply)
         # new_order.order_message = new_order.conversation[0].message
         new_order.bind(on_updated=self.refresh_orders)
 

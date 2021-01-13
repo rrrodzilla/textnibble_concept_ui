@@ -12,8 +12,6 @@ class ConversationMessageWidget(BoxLayout):
 
     def __init__(self, conversation: ConversationMessage, **kwargs):
         self.conversation = conversation
+        self.humanized_time = arrow.Arrow.fromdatetime(conversation.send_time).humanize()
         super(ConversationMessageWidget, self).__init__(**kwargs)
 
-    def on_conversation(self, instance, value):
-        print('humanizing')
-        self.humanized_time = arrow.Arrow.fromdatetime(value.send_time).humanize()
