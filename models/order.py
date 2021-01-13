@@ -1,8 +1,9 @@
 from datetime import datetime
 
 from kivy.event import EventDispatcher
-from kivy.properties import ObjectProperty, NumericProperty
+from kivy.properties import ObjectProperty
 
+from models.conversationmessage import ConversationMessage
 from models.order_status_enum import OrderStatus
 
 
@@ -13,10 +14,11 @@ class Order(EventDispatcher):
         self.id: str
         self.time: datetime
         self.customer_name: str = ''
-        self.order_message: str = ''
+        self.conversation: list[ConversationMessage] = []
+        # self.order_message: str = ''
+
         self.register_event_type('on_updated')
         super(Order, self).__init__(**kwargs)
-        # self.status = OrderStatus.NEW
 
     def __repr__(self):
         return "Order Object"

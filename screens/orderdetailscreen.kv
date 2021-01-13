@@ -1,64 +1,156 @@
 #:kivy 2.0.0
 #:import C kivy.utils.get_color_from_hex
 #:import status models.order_status_enum.OrderStatus
+#:include ./widgets/conversationmessagewidget.kv
+
 
 <SimpleButton@Button>:
-    size_hint: None, None
-    size: [256, 64]
+    size_hint: 1, None
+    size: [96, 64]
+    font_size: 12
     pos_hint: {'center_y': .5}
 <OrderDetailScreen>:
     current_order:
     name: 'order_detail'
-    AnchorLayout:
+    canvas.before:
+        Color:
+            rgb: C('#18181B')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
 #        canvas.before:
 #            Color:
 #                rgb: C('#FF00FF')
 #            Rectangle:
 #                size: self.size
 #                pos: self.pos
-        anchor_y: 'center'
-        anchor_x: 'center'
-        size_hint: None, 1
+        size_hint: 1, 1
         pos_hint: {'center_y': .5, 'center_x': .5}
-        width: buttons.minimum_width
+        orientation: 'vertical'
         BoxLayout:
-            id: buttons
 #            canvas.before:
 #                Color:
-#                    rgb: C('#0000FF')
+#                    rgb: C('#FF00FF')
 #                Rectangle:
 #                    size: self.size
 #                    pos: self.pos
-            spacing: 24
-            orientation: 'vertical'
-            size_hint: 1, .5
-            minimum_width: self.width
-            pos_hint: {'center_y': .5}
-            SimpleButton:
-                text: 'Send Message'
-                on_press:root.update_order_status(status.AWAITING_REPLY)
-            SimpleButton:
-                text: 'Receive Update'
-                on_press:root.update_order_status(status.UPDATED)
-            SimpleButton:
-                text: 'Send Quote'
-                on_press:root.update_order_status(status.AWAITING_PAYMENT)
-            SimpleButton:
-                text: 'Receive Payment'
-                on_press:root.update_order_status(status.PAID)
-            SimpleButton:
-                text: 'Send to Kitchen'
-                on_press:root.update_order_status(status.WORKING)
-            SimpleButton:
-                text: 'Finish Working'
-                on_press:root.update_order_status(status.AWAITING_PICKUP)
-            SimpleButton:
-                text: 'Picked Up'
-                on_press:root.update_order_status(status.FULFILLED)
-            Label:
-                text: root.current_order.customer_name if (root.current_order is not None and root.current_order.customer_name) else ''
-            Label:
-                text: root.current_order.order_message if (root.current_order is not None and root.current_order.order_message) else ''
-            Label:
-                text: root.current_order.status.name if (root.current_order is not None and root.current_order.status) else ''
+            size_hint: 1, 1
+            BoxLayout:
+                id: conversation_layout
+                orientation: 'vertical'
+                size_hint: .25, 1
+                padding:  24
+                ScrollView:
+                    pos_hint: {"center_x": .5}
+                    width: conversation_layout.minimum_width
+                    do_scroll_x: False
+                    do_scroll_y: True
+                    bar_width: 0
+                    size_hint: 1, .95
+                    GridLayout:
+#                        canvas.before:
+#                            Color:
+#                                rgb: C('#00FF00')
+#                            Rectangle:
+#                                size: self.size
+#                                pos: self.pos
+                        id: conversation
+                        cols: 1
+                        spacing: 60
+                        size_hint: 1, None
+                        height: self.minimum_height
+                        width: self.minimum_width
+#                    canvas.before:
+#                        Color:
+#                            rgb: C('#00FF00')
+#                        Rectangle:
+#                            size: self.size
+#                            pos: self.pos
+                BoxLayout:
+                    size_hint: 1, .05
+                    orientation: 'horizontal'
+                    spacing: 8
+                    TextInput:
+#                        canvas.before:
+#                            Color:
+#                                rgb: C('#00FF00')
+#                            Rectangle:
+#                                size: self.size
+#                                pos: self.pos
+                        pos_hint: {"center_y": .5}
+                        size_hint: .7, 1
+                    Button:
+#                        canvas.before:
+#                            Color:
+#                                rgb: C('#FF0000')
+#                            Rectangle:
+#                                size: self.size
+#                                pos: self.pos
+                        pos_hint: {"center_y": .5}
+                        size_hint: .3, 1
+                        text: 'Send'
+            BoxLayout:
+                id: quote_actions
+                canvas.before:
+                    Color:
+                        rgb: C('#0F0F0F')
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                size_hint: .75, 1
+
+#        BoxLayout:
+#            id: buttons
+##            canvas.before:
+##                Color:
+##                    rgb: C('#FF00FF')
+##                Rectangle:
+##                    size: self.size
+##                    pos: self.pos
+#            spacing: 8
+#            size_hint: 1, None
+#            height: 96
+#            size_hint_max_x: 128
+#            padding: 24
+#            minimum_width: self.width
+#            pos_hint: {'center_y': 1, 'center_x': .5}
+#            SimpleButton:
+#                text: 'Message'
+#                on_press:root.update_order_status(status.AWAITING_REPLY)
+#            SimpleButton:
+#                text: 'Replied'
+#                on_press:root.update_order_status(status.UPDATED)
+#            SimpleButton:
+#                text: 'Quote'
+#                on_press:root.update_order_status(status.AWAITING_PAYMENT)
+#            SimpleButton:
+#                text: 'Paid'
+#                on_press:root.update_order_status(status.PAID)
+#            SimpleButton:
+#                text: 'To Kitchen'
+#                on_press:root.update_order_status(status.WORKING)
+#            SimpleButton:
+#                text: 'Finish'
+#                on_press:root.update_order_status(status.AWAITING_PICKUP)
+#            SimpleButton:
+#                text: 'Picked Up'
+#                on_press:root.update_order_status(status.FULFILLED)
+#        BoxLayout:
+##            canvas.before:
+##                Color:
+##                    rgb: C('#0000FF')
+##                Rectangle:
+##                    size: self.size
+##                    pos: self.pos
+#            pos_hint: {'center_y': 1}
+#            spacing: 96
+#            size_hint: 1, None
+#            height: 96
+#            Label:
+#                text: root.current_order.customer_name if (root.current_order is not None and root.current_order.customer_name) else ''
+#            Label:
+#                text: root.current_order.conversation[0].message if (root.current_order is not None and root.current_order.conversation) else ''
+#            Label:
+#                text: root.current_order.status.name if (root.current_order is not None and root.current_order.status) else ''
 

@@ -29,7 +29,7 @@ class Order(ButtonBehavior, BoxLayout):
         super(Order, self, **kwargs).__init__(**kwargs)
 
         self.current_order = order
-        self.order_message = order.order_message
+        self.order_message = order.conversation[0].message
         self.customer_name = order.customer_name
         if order.status is OrderStatus.NEW:
             self.ids.status_label.text = "NEW"
@@ -62,7 +62,7 @@ class Order(ButtonBehavior, BoxLayout):
 
     def set_age(self, instance):
         dt = self.current_order.time
-        adt = arrow.Arrow.fromdatetime(dt)
+
         self.minutes, self.ago = arrow.Arrow.fromdatetime(self.current_order.time).humanize().split(' ', 1)
         if not IsInt(self.minutes):
             self.ago = f'[size=24][b]{self.minutes}\n{self.ago}[/b][/size]'

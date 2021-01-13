@@ -1,0 +1,75 @@
+#:kivy 2.0.0
+#:import C kivy.utils.get_color_from_hex
+#:import Triangle kivy.graphics
+
+<MessageLabel@Label>:
+    font_name: 'Inter'
+    markup: True
+<ConversationMessageWidget>:
+#    canvas.before:
+#        Color:
+#            rgb: C('#00FF00')
+#        Rectangle:
+#            size: self.size
+#            pos: self.pos
+    conversation:
+    humanized_time:
+    size_hint: 1, None
+    pos_hint: {'center_x': .5, 'center_y': .5}
+    FloatLayout:
+
+        size_hint: 1, 1
+        width: root.width
+        height: 96
+        MessageLabel:
+            id: msg
+            canvas.before:
+                Color:
+                    rgb: C('#0284C7') if not root.conversation.is_business_response else C('#0C4A6E')
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [4, 4, 4, 4]
+                Color:
+                    rgb: C('#0284C7') if not root.conversation.is_business_response else C('#0C4A6E')
+                Triangle:
+                    points: [self.width - 48, self.y, self.width - 24, self.y, self.width - 48, self.y - 18] if not root.conversation.is_business_response else [self.x + 48, self.y, self.x + 72, self.y, self.x + 72, self.y - 18]
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            size_hint: 1, 1
+            text_size: self.size
+            color: C('#F5F5F5') if not root.conversation.is_business_response else C('#A3A3A3')
+            halign: 'left'
+            valign: 'top'
+            padding: 24, 24
+            text: root.conversation.message
+        BoxLayout:
+#            canvas.before:
+#                Color:
+#                    rgb: C('#00FF00')
+#                Rectangle:
+#                    size: self.size
+#                    pos: self.pos
+            pos: (msg.width - self.width - 60, msg.y - self.height - 5) if not root.conversation.is_business_response else (84, msg.y - self.height - 5)
+            size_hint: None, .2
+            width: self.minimum_width
+            spacing: 4
+            MessageLabel:
+                id: msg_sender
+                text: f'[i]{root.conversation.sender}[/i]'
+                color: C('#F5F5F5') if not root.conversation.is_business_response else C('#737373')
+#                halign: 'right' if not root.conversation.is_business_response else 'left'
+                halign: 'left'
+                valign: 'top'
+                text_size: self.size
+                size_hint: None, 1
+                font_size: 12
+            MessageLabel:
+                id: msg_time
+                text: ' - a few minutes ago'
+#                text: f'[i]{root.humanized_time}[/i]'
+                color: C('#F5F5F5') if not root.conversation.is_business_response else C('#737373')
+                halign: 'left'
+                valign: 'top'
+                size_hint: None, 1
+                text_size: self.size
+                font_size: 12

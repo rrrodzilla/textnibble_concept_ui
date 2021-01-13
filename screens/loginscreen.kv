@@ -22,7 +22,7 @@
             id: pin_number
             on_clear: pin_display.set_max_size(self.max_size)
             on_add_digit: pin_display.enable(len(self.pin))
-            on_complete: root.manager.current = 'main'
+            on_complete: root.login()
         BoxLayout:
             orientation: 'vertical'
             spacing: 4

@@ -3,6 +3,7 @@ from kivy.uix.screenmanager import Screen, FallOutTransition
 
 from models.order import Order
 from models.order_status_enum import OrderStatus
+from widgets.conversationmessagewidget import ConversationMessageWidget
 
 
 class OrderDetailScreen(Screen):
@@ -10,6 +11,12 @@ class OrderDetailScreen(Screen):
 
     def __init__(self, **kwargs):
         super(OrderDetailScreen, self).__init__(**kwargs)
+
+    def on_current_order(self, instance, value):
+        self.ids.conversation.clear_widgets()
+        for message in value.conversation:
+            print(f'adding message for {message.sender}')
+            self.ids.conversation.add_widget(ConversationMessageWidget(message))
 
     def update_order_status(self, status: OrderStatus):
         self.current_order.status = status

@@ -13,6 +13,7 @@ from datamanagers.orderfilterfullfilled import OrderFilterFulfilled
 from datamanagers.orderfilteridle import OrderFilterIdle
 from datamanagers.orderfilterworking import OrderFilterWorking
 from descriptors.lazyproperty import LazyProperty
+from models.conversationmessage import ConversationMessage
 from models.order import Order as orderObj
 from models.order_status_enum import OrderStatus
 from singleton import Singleton
@@ -55,12 +56,12 @@ class OrderManager(Widget):
     def on_loaded(self, *args):
         pass
 
-    def update_order(self, order):
-        update_index = next(i for i, x in enumerate(self.all_orders) if x.id == order.id)
-        print(f'found index {update_index} for id: {order.id} with customer {order.customer_name}')
-        print(f'attempting to update order {order.id} for {order.customer_name} with status {order.status.name} from '
-              f'status {self.all_orders[next(i for i, x in enumerate(self.all_orders) if x.id == order.id)].status.name}')
-        self.all_orders[next(i for i, x in enumerate(self.all_orders) if x.id == order.id)] = order
+    # def update_order(self, order):
+    #     update_index = next(i for i, x in enumerate(self.all_orders) if x.id == order.id)
+    #     print(f'found index {update_index} for id: {order.id} with customer {order.customer_name}')
+    #     print(f'attempting to update order {order.id} for {order.customer_name} with status {order.status.name} from '
+    #           f'status {self.all_orders[next(i for i, x in enumerate(self.all_orders) if x.id == order.id)].status.name}')
+    #     self.all_orders[next(i for i, x in enumerate(self.all_orders) if x.id == order.id)] = order
 
     def on_all_orders(self, instance, value):
         self.all_orders = value
@@ -85,8 +86,22 @@ class OrderManager(Widget):
             new_order.time = datetime.now(tz=timezone.utc) + relativedelta(minutes=-random.randint(0, 2))
         else:
             new_order.time = datetime.now(tz=timezone.utc) + relativedelta(minutes=-random.randint(2, 15))
-        new_order.order_message = f'{random.randint(1, 2)} {fake.word(ext_word_list=self.food_word_list)} and ' \
+        msg = ConversationMessage()
+        msg.id = msg.uid
+        msg.sender = new_order.customer_name
+        msg.message = f'{random.randint(1, 2)} {fake.word(ext_word_list=self.food_word_list)} and ' \
                                   f'{random.randint(1, 2)} {fake.word(ext_word_list=self.food_word_list)}'
+
+        new_order.conversation.append(msg)
+
+        biz_response = ConversationMessage()
+        biz_response.id = biz_response.uid
+        biz_response.sender = 'Jibe Espresso Bar - Roland'
+        biz_response.message = 'Hi! What size would you like?'
+        biz_response.is_business_response = True
+
+        new_order.conversation.append(biz_response)
+        # new_order.order_message = new_order.conversation[0].message
         new_order.bind(on_updated=self.refresh_orders)
 
         self.all_orders.append(new_order)
