@@ -83,7 +83,7 @@ class OrderManager(Widget):
         new_order.customer_name = fake.name()
         # new_order.status = OrderStatus(random.randint(OrderStatus.NEW.value, OrderStatus.FULFILLED.value))
         if new_order.status is OrderStatus.NEW:
-            new_order.time = datetime.now(tz=timezone.utc) + relativedelta(minutes=-random.randint(2, 3))
+            new_order.time = datetime.now(tz=timezone.utc) + relativedelta(minutes=-random.randint(2, 4))
         else:
             new_order.time = datetime.now(tz=timezone.utc) + relativedelta(minutes=-random.randint(2, 15))
         msg = ConversationMessage()

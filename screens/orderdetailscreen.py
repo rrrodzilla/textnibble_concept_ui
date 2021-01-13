@@ -18,6 +18,7 @@ class OrderDetailScreen(Screen):
         msg.id = msg.uid
         msg.sender = "Jibe Espresso Bar - Roland"
         msg.message = self.ids.msg_input.text
+        msg.is_business_response = True
         self.current_order.conversation.append(msg)
         prop = self.property('current_order')
         prop.dispatch(self)
