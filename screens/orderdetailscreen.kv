@@ -3,10 +3,41 @@
 #:import status models.order_status_enum.OrderStatus
 #:include ./widgets/conversationmessagewidget.kv
 
-
+<PricingBoxLayout@BoxLayout>
+    padding: 0, 0, 48, 0
+<PriceLabel@Label>
+#    canvas.before:
+#        Color:
+#            rgb: C('#FF0000')
+#        Rectangle:
+#            pos: self.pos
+#            size: self.size
+    font_name: 'Inter'
+    markup: True
+    size_hint: .35, 1
+    font_size: 22
+    text_size: self.size
+    valign: 'center'
+    halign: 'right'
+    pos_hint: {'center_y': .5, 'center_x': 1}
+<TotalLabel@Label>
+#    canvas.before:
+#        Color:
+#            rgb: C('#0000FF')
+#        Rectangle:
+#            pos: self.pos
+#            size: self.size
+    font_name: './fonts/Inter-Thin.ttf'
+    size_hint: .65, 1
+    text_size: self.size
+    valign: 'center'
+    halign: 'right'
+    markup: True
+    font_size: 60
 <SimpleButton@Button>:
     size_hint: 1, None
     size: [96, 64]
+    font_name: 'Inter'
     font_size: 12
     pos_hint: {'center_y': .5}
 <OrderDetailScreen>:
@@ -117,7 +148,49 @@
                     Rectangle:
                         size: self.size
                         pos: self.pos
-                size_hint: .75, 1
+                size_hint: .50, 1
+                BoxLayout:
+                    orientation: 'vertical'
+                    PricingBoxLayout:
+#                        canvas.before:
+#                            Color:
+#                                rgb: C('#FF00FF')
+#                            Rectangle:
+#                                pos: self.pos
+#                                size: self.size
+                        PriceLabel:
+                            text: 'Order Subtotal'
+                        TotalLabel:
+                            text: '[i]$0.00[/i]'
+                    PricingBoxLayout:
+                        PriceLabel:
+                            text: 'Total Tax'
+                        TotalLabel:
+                            text: '[i]$0.00[/i]'
+                    PricingBoxLayout:
+                        PriceLabel:
+                            text: 'Order Total'
+                        TotalLabel:
+                            font_size: 84
+                            font_name: 'Inter'
+                            text: '[b]$0.00[/b]'
+                    PricingBoxLayout:
+                        PriceLabel:
+                            text: 'Estimated time\nto prepare'
+                        TotalLabel:
+                            text: '10 minutes'
+                    Button:
+                        text: 'Send price'
+                        on_press:root.update_order_status(status.AWAITING_PAYMENT)
+            BoxLayout:
+                id: keypad
+                canvas.before:
+                    Color:
+                        rgb: C('#0F0F0F')
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                size_hint: .25, 1
 
 #        BoxLayout:
 #            id: buttons
