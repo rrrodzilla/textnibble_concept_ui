@@ -89,6 +89,7 @@
 #                    size: self.texture_size
                     height: 96
                 ScrollView:
+                    id: scroll_view
                     pos_hint: {"center_x": .5}
                     width: conversation_layout.minimum_width
                     do_scroll_x: False
@@ -96,15 +97,10 @@
                     bar_width: 0
                     size_hint: 1, .95
                     GridLayout:
-#                        canvas.before:
-#                            Color:
-#                                rgb: C('#00FF00')
-#                            Rectangle:
-#                                size: self.size
-#                                pos: self.pos
                         id: conversation
                         cols: 1
                         spacing: 60
+#                        padding: 0, 0, 0, 60
                         size_hint: 1, None
                         height: self.minimum_height
                         width: self.minimum_width
@@ -139,6 +135,7 @@
                         pos_hint: {"center_y": .5}
                         on_press:root.send_order_message()
                         size_hint: .3, 1
+                        disabled: msg_input.text == ''
                         text: 'Send'
             BoxLayout:
                 id: quote_actions
@@ -148,7 +145,7 @@
                     Rectangle:
                         size: self.size
                         pos: self.pos
-                size_hint: .50, 1
+                size_hint: .45, 1
                 BoxLayout:
                     orientation: 'vertical'
                     PricingBoxLayout:
@@ -159,17 +156,17 @@
 #                                pos: self.pos
 #                                size: self.size
                         PriceLabel:
-                            text: 'Order Subtotal'
+                            text: '[i]Subtotal[/i]'
                         TotalLabel:
                             text: '[i]$0.00[/i]'
                     PricingBoxLayout:
                         PriceLabel:
-                            text: 'Total Tax'
+                            text: '[i]Total Tax[/i]'
                         TotalLabel:
                             text: '[i]$0.00[/i]'
                     PricingBoxLayout:
                         PriceLabel:
-                            text: 'Order Total'
+                            text: '[i]Order Total[/i]'
                         TotalLabel:
                             font_size: 84
                             font_name: 'Inter'
@@ -190,7 +187,7 @@
                     Rectangle:
                         size: self.size
                         pos: self.pos
-                size_hint: .25, 1
+                size_hint: .35, 1
 
 #        BoxLayout:
 #            id: buttons

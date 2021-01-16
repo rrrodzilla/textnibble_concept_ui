@@ -1,3 +1,6 @@
+from functools import partial
+
+from kivy.clock import Clock
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.screenmanager import Screen, FallOutTransition
 
@@ -8,10 +11,36 @@ from widgets.conversationmessagewidget import ConversationMessageWidget
 
 
 class OrderDetailScreen(Screen):
-    current_order = ObjectProperty(rebind=True)
+    current_order: ObjectProperty(rebind=True)
 
     def __init__(self, **kwargs):
+        # self.current_order = Order()
         super(OrderDetailScreen, self).__init__(**kwargs)
+
+    def current_order_changed(self, *args):
+        print("current order changed")
+
+    def on_pre_enter(self, *args):
+        print(self)
+        print(
+            f"on_pre_enter - screen current order: {self.current_order.customer_name}\n"
+            f"on_pre_enter - current order: {self.manager.order_manager.current_order.customer_name}"
+        )
+        self.manager.order_manager.bind(
+            on_current_order_changed=self.current_order_changed
+        )
+        self.current_order = self.manager.order_manager.current_order
+        self.current_order.bind(on_conversation_updated=self.on_conversation_updated)
+        prop = self.property("current_order")
+        prop.dispatch(self)
+        self.ids.conversation.clear_widgets()
+        for message in self.current_order.conversation:
+            widget = ConversationMessageWidget(message)
+            self.ids.conversation.add_widget(widget)
+
+    def on_conversation_updated(self, value, *args):
+        convo = args[0]
+        print(f"conversation updated with {args[0]}")
 
     def send_order_message(self):
         msg = ConversationMessage()
@@ -19,23 +48,28 @@ class OrderDetailScreen(Screen):
         msg.sender = "Jibe Espresso Bar - Roland"
         msg.message = self.ids.msg_input.text
         msg.is_business_response = True
+        # TODO get rid of debug statement
         self.current_order.conversation.append(msg)
-        prop = self.property('current_order')
-        prop.dispatch(self)
-        self.update_order_status(OrderStatus.AWAITING_REPLY)
+        new_message_widget = ConversationMessageWidget(msg)
+        self.ids.conversation.add_widget(new_message_widget)
 
-    def on_current_order(self, instance, value):
+        # self.ids.scroll_view.scroll_to(new_message_widget)
+        self.ids.msg_input.text = ""
+        # wait a moment before switching screens
+        # Clock.schedule_once(partial(self.update_order_status, OrderStatus.AWAITING_REPLY), 2)
+
+    def on_current_order(self):
+        # clear message box
+        print("current order updated")
         self.ids.conversation.clear_widgets()
         for message in value.conversation:
-            print(f'adding message for {message.sender}')
             self.ids.conversation.add_widget(ConversationMessageWidget(message))
 
-    def update_order_status(self, status: OrderStatus):
+    def update_order_status(self, status: OrderStatus, *args):
         self.current_order.status = status
-        # self.manager.update_order(self.current_order)
+        # go to the first screen with orders
         for screen in self.manager.screens:
-            if hasattr(screen, 'orders') and len(screen.orders) > 0:
+            if hasattr(screen, "orders") and len(screen.orders) > 0:
                 self.manager.transition = FallOutTransition()
                 self.manager.current = screen.name
                 break
-        # self.manager.remove_widget(self)

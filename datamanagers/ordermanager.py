@@ -29,7 +29,7 @@ class OrderManager(Widget):
     idle_orders = ListProperty(rebind=True)
     awaiting_pickup_orders = ListProperty(rebind=True)
     fulfilled = ListProperty(rebind=True)
-    current_order = ObjectProperty(orderObj())
+    current_order = ObjectProperty(orderObj(), rebind=True)
     food_word_list = [
         'latte', 'muffin', 'cappuccino',
         'breakfast sandwich', 'iced tea', 'chocolate chip cookie',
@@ -40,11 +40,18 @@ class OrderManager(Widget):
         super(OrderManager, self).__init__(**kwargs)
         self.register_event_type('on_loaded')
         self.register_event_type('on_updated')
+        self.register_event_type('on_current_order_changed')
         self.register_event_type('on_clear')
         # self.load_dummy_orders()
 
     def on_updated(self, *args):
         pass
+
+    def on_current_order_changed(self, value, *args):
+        pass
+
+    def on_current_order(self, value, *args):
+        self.dispatch('on_current_order_changed', *args)
 
     def clear(self):
         self.all_orders.clear()
@@ -72,7 +79,8 @@ class OrderManager(Widget):
         self.fulfilled = OrderFilterFulfilled().Filter(value)
 
     def refresh_orders(self, instance, value):
-        print('refreshing orders')
+        # TODO get rid of debug statment
+        # print('refreshing orders')
         prop = self.property('all_orders')
         prop.dispatch(self)
 

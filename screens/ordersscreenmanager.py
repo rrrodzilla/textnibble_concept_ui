@@ -1,6 +1,12 @@
 from kivy.properties import ObjectProperty
-from kivy.uix.screenmanager import ScreenManager, CardTransition, SwapTransition, WipeTransition, SlideTransition, \
-    RiseInTransition
+from kivy.uix.screenmanager import (
+    ScreenManager,
+    CardTransition,
+    SwapTransition,
+    WipeTransition,
+    SlideTransition,
+    RiseInTransition,
+)
 
 from datamanagers.ordermanager import OrderManager
 from models.order import Order
@@ -14,13 +20,11 @@ class OrdersScreenManager(ScreenManager):
         super().__init__(**kwargs)
 
     def edit_order(self, order: Order):
-        print(f'Editing order for {order.customer_name}')
+        # TODO get rid of debug print
+        # print(f'Editing order for {order.customer_name}')
         self.order_manager.current_order = order
-        # detail_screen = OrderDetailScreen()
-        # detail_screen.current_order = order
-        # self.add_widget(detail_screen)
         self.transition = RiseInTransition()
-        self.current = 'order_detail'
+        self.current = "order_detail"
 
     def update_order(self, order):
         self.order_manager.update_order(order)
@@ -28,4 +32,3 @@ class OrdersScreenManager(ScreenManager):
     def nav(self, screen_name):
         self.transition = SlideTransition()
         self.current = screen_name
-

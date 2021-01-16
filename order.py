@@ -68,5 +68,6 @@ class Order(ButtonBehavior, BoxLayout):
             self.ago = f'[size=24][b]{self.minutes}\n{self.ago}[/b][/size]'
 
     def on_press(self):
-        print(f'Pressed {self.current_order.customer_name}\n')
+        # TODO get rid of debug statment
+        # print(f'Pressed {self.current_order.customer_name}\n')
         pass
