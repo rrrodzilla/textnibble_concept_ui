@@ -36,18 +36,24 @@ class OrderDetailScreen(Screen):
         self.ids.conversation.clear_widgets()
         self.ids.numpad.bind(on_key_pressed=self.set_price_subtotal)
 
+        self.ids.price_subtotal.bind(on_changed=self.update_total)
         for message in self.current_order.conversation:
             widget = ConversationMessageWidget(message)
             self.ids.conversation.add_widget(widget)
 
     def set_price_subtotal(self, value, *args):
-        if args[0] is "Done":
+        if args[0] is "Clear":
             self.ids.price_subtotal.clear()
         else:
             self.ids.price_subtotal.append(args[0])
             print(f"new subtotal: {self.ids.price_subtotal.total}")
             print(f"appending to subtotal: {args[0]}")
         self.ids.total_label.text = "${:,.2f}".format(self.ids.price_subtotal.total)
+
+    def update_total(self, value, *args):
+        self.ids.total_price_label.text = "${:,.2f}".format(
+            self.ids.price_subtotal.total + self.ids.tax_subtotal.total
+        )
 
     def on_conversation_updated(self, value, *args):
         convo = args[0]

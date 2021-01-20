@@ -54,6 +54,8 @@
             size: self.size
     Subtotal:
         id:price_subtotal
+    Subtotal:
+        id:tax_subtotal
     BoxLayout:
 #        canvas.before:
 #            Color:
@@ -168,14 +170,15 @@
                         PriceLabel:
                             text: '[i]Total Tax[/i]'
                         TotalLabel:
+                            id: tax_total_label
                             text: '[i]$0.00[/i]'
                     PricingBoxLayout:
                         PriceLabel:
                             text: '[i]Order Total[/i]'
                         TotalLabel:
+                            id: total_price_label
                             font_size: 84
                             font_name: 'Inter'
-                            text: '[b]$0.00[/b]'
                     PricingBoxLayout:
                         PriceLabel:
                             text: 'Estimated time\nto prepare'
@@ -193,9 +196,12 @@
                         size: self.size
                         pos: self.pos
                 size_hint: .35, 1
-                Numpad:
-                    id:numpad
-                    size_hint: 1, 1
+                AnchorLayout:
+                    Numpad:
+                        id:numpad
+                        size_hint: None, None
+                        height: self.minimum_height
+                        width: self.minimum_width
 #        BoxLayout:
 #            id: buttons
 ##            canvas.before:

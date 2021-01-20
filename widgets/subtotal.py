@@ -24,5 +24,6 @@ class Subtotal(Widget):
 
     def append(self, val: str):
         self._subtotal.append(val)
+        self.dispatch("on_changed", self.total)
 
     total = property(get_total)
