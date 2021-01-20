@@ -11,5 +11,5 @@ class Numpad(GridLayout):
         self.register_event_type("on_key_pressed")
 
     def on_key_pressed(self, val):
-        print("key pressed from Numpad")
+        print(f"key pressed from Numpad: {val}")
         pass

@@ -2,6 +2,9 @@
 #:import C kivy.utils.get_color_from_hex
 #:import status models.order_status_enum.OrderStatus
 #:include ./widgets/conversationmessagewidget.kv
+#:import Numpad widgets.numpad
+#:include ./widgets/numpad.kv
+#:import Subtotal widgets.subtotal
 
 <PricingBoxLayout@BoxLayout>
     padding: 0, 0, 48, 0
@@ -49,6 +52,8 @@
         Rectangle:
             pos: self.pos
             size: self.size
+    Subtotal:
+        id:price_subtotal
     BoxLayout:
 #        canvas.before:
 #            Color:
@@ -158,7 +163,7 @@
                         PriceLabel:
                             text: '[i]Subtotal[/i]'
                         TotalLabel:
-                            text: '[i]$0.00[/i]'
+                            id: total_label
                     PricingBoxLayout:
                         PriceLabel:
                             text: '[i]Total Tax[/i]'
@@ -188,7 +193,9 @@
                         size: self.size
                         pos: self.pos
                 size_hint: .35, 1
-
+                Numpad:
+                    id:numpad
+                    size_hint: 1, 1
 #        BoxLayout:
 #            id: buttons
 ##            canvas.before:

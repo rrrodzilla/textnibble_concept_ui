@@ -34,9 +34,17 @@ class OrderDetailScreen(Screen):
         prop = self.property("current_order")
         prop.dispatch(self)
         self.ids.conversation.clear_widgets()
+        self.ids.numpad.bind(on_key_pressed=self.set_price_subtotal)
+
         for message in self.current_order.conversation:
             widget = ConversationMessageWidget(message)
             self.ids.conversation.add_widget(widget)
+
+    def set_price_subtotal(self, value, *args):
+        self.ids.price_subtotal.append(args[0])
+        print(f"new subtotal: {self.ids.price_subtotal.total}")
+        print(f"appending to subtotal: {args[0]}")
+        self.ids.total_label.text = "${:,.2f}".format(self.ids.price_subtotal.total)
 
     def on_conversation_updated(self, value, *args):
         convo = args[0]
