@@ -41,9 +41,12 @@ class OrderDetailScreen(Screen):
             self.ids.conversation.add_widget(widget)
 
     def set_price_subtotal(self, value, *args):
-        self.ids.price_subtotal.append(args[0])
-        print(f"new subtotal: {self.ids.price_subtotal.total}")
-        print(f"appending to subtotal: {args[0]}")
+        if args[0] is "Done":
+            self.ids.price_subtotal.clear()
+        else:
+            self.ids.price_subtotal.append(args[0])
+            print(f"new subtotal: {self.ids.price_subtotal.total}")
+            print(f"appending to subtotal: {args[0]}")
         self.ids.total_label.text = "${:,.2f}".format(self.ids.price_subtotal.total)
 
     def on_conversation_updated(self, value, *args):

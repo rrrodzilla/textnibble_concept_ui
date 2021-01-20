@@ -17,7 +17,10 @@ class Subtotal(Widget):
         self.dispatch("on_changed", self.total)
 
     def get_total(self):
-        return Decimal("".join(self._subtotal)) / 100
+        if len(self._subtotal) is not 0:
+            return Decimal("".join(self._subtotal)) / 100
+        else:
+            return Decimal("0")
 
     def append(self, val: str):
         self._subtotal.append(val)
