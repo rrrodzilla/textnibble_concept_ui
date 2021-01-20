@@ -1,0 +1,14 @@
+#:kivy 2.0.0
+#:import C kivy.utils.get_color_from_hex
+
+<PinCharacter>:
+    anchor_y: 'center'
+    anchor_x: 'center'
+    Label:
+        size_hint: .75, .75
+        text: '*'
+        font_name: 'Inter'
+        bold: True
+        font_size: 48
+        markup: True
+        color: (C('#15803D') if not self.disabled else C('#3F3F46'))

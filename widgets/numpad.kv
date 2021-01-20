@@ -1,0 +1,62 @@
+#:kivy 2.0.0
+#:import C kivy.utils.get_color_from_hex
+#:import KeypadButton keypadbutton
+
+<KeypadButton>:
+    color: C('#27272A')
+
+<Numpad>:
+    width: self.minimum_width
+    height: self.minimum_height
+    size_hint: None, None
+    cols: 3
+    spacing: 6
+    KeypadButton:
+        text: '1'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
+    KeypadButton:
+        text: '2'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
+    KeypadButton:
+        text: '3'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
+    KeypadButton:
+        text: '4'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
+    KeypadButton:
+        text: '5'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
+    KeypadButton:
+        text: '6'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
+    KeypadButton:
+        text: '7'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
+    KeypadButton:
+        text: '8'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
+    KeypadButton:
+        text: '9'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
+    KeypadButton:
+        text: '0'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
+    KeypadButton:
+        text: '00'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
+    KeypadButton:
+        text: 'Done'
+        disabled: root.disabled
+        on_press: root.dispatch('on_key_pressed', self.key_val)
+

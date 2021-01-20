@@ -1,0 +1,26 @@
+#:kivy 2.0.0
+#:import C kivy.utils.get_color_from_hex
+
+
+
+<PriceLabel>:
+#    canvas.before:
+#        Color:
+#            rgb: C('#FF0000')
+#        Rectangle:
+#            pos: self.pos
+#            size: self.size
+    font_name: 'Inter'
+    markup: True
+    size_hint: .35, 1
+    font_size: 22
+    text_size: self.size
+    valign: 'center'
+    halign: 'right'
+    pos_hint: {'center_y': .5, 'center_x': 1}
+        Label:
+            size_hint: 1, 1
+            text: "heading"
+        Label:
+            size_hint: 1, 1
+            text: "$0.000"

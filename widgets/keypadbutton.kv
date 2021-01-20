@@ -1,0 +1,22 @@
+#:kivy 2.0.0
+#:import C kivy.utils.get_color_from_hex
+
+<KeypadButton>:
+    canvas.before:
+        Color:
+            rgb: (C('#15803D') if not self.disabled else C('#3F3F46')) #3F6212
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [4, 4, 4, 4]
+    background_color: 0, 0, 0, 0
+#    background_color: C('#15803D')
+    italic: True
+    markup: True
+    font_name: 'Inter'
+    font_size: 28
+    size_hint_x: None
+    size_hint_y: None
+    size: [96, 96]
+    color: C('#27272A')
+    key_val: self.text
