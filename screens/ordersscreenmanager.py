@@ -14,9 +14,10 @@ from screens.orderdetailscreen import OrderDetailScreen
 
 
 class OrdersScreenManager(ScreenManager):
-    order_manager = ObjectProperty(OrderManager(), rebind=True)
+    order_manager = ObjectProperty(rebind=True)
 
     def __init__(self, **kwargs):
+        self.order_manager = OrderManager()
         super().__init__(**kwargs)
 
     def edit_order(self, order: Order):

@@ -23,7 +23,8 @@ class Subtotal(Widget):
             return Decimal("0")
 
     def append(self, val: str):
-        self._subtotal.append(val)
-        self.dispatch("on_changed", self.total)
+        if not val is ".":
+            self._subtotal.append(val)
+            self.dispatch("on_changed", self.total)
 
     total = property(get_total)

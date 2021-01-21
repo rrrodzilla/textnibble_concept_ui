@@ -1,0 +1,42 @@
+#:kivy 2.0.0
+#:import C kivy.utils.get_color_from_hex
+
+<SubtotalHeading@Label>:
+    color: C('#E5E5E5')
+    font_name: 'Inter'
+    font_size: 24
+    markup: True
+    text_size: self.size 
+    halign: 'left'
+    valign: 'top'
+    size_hint: 1, .5
+<Heading@Label>:
+    color: C('#E5E5E5')
+    font_name: 'Inter'
+    font_size: 14
+    markup: True
+    text_size: self.size 
+    halign: 'left'
+    valign: 'bottom'
+    size_hint: 1, .5
+
+<SubtotalEditor>:
+    subtotal:
+    heading_text:
+    subtotal_text:
+    canvas.before:
+        Color:
+            rgb: C('#3F3F46')
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [8]
+    size_hint: 1, 1
+    BoxLayout:
+        size_hint: 1, 1
+        orientation: 'vertical'
+        padding: 24, 12, 24, 12
+        Heading: 
+            text: root.heading_text
+        SubtotalHeading:
+            text: "${:,.2f}".format(root.subtotal.total)

@@ -4,7 +4,8 @@
 #:include ./widgets/conversationmessagewidget.kv
 #:import Numpad widgets.numpad
 #:include ./widgets/numpad.kv
-#:import Subtotal widgets.subtotal
+#:import SubtotalEditor widgets.subtotaleditor
+#:include ./widgets/subtotaleditor.kv
 
 <PricingBoxLayout@BoxLayout>
     padding: 0, 0, 48, 0
@@ -44,7 +45,7 @@
     font_size: 12
     pos_hint: {'center_y': .5}
 <OrderDetailScreen>:
-    current_order:
+    current_order: root.manager.order_manager.current_order
     name: 'order_detail'
     canvas.before:
         Color:
@@ -52,10 +53,6 @@
         Rectangle:
             pos: self.pos
             size: self.size
-    Subtotal:
-        id:price_subtotal
-    Subtotal:
-        id:tax_subtotal
     BoxLayout:
 #        canvas.before:
 #            Color:
@@ -153,40 +150,109 @@
                         size: self.size
                         pos: self.pos
                 size_hint: .45, 1
+
                 BoxLayout:
                     orientation: 'vertical'
-                    PricingBoxLayout:
-#                        canvas.before:
-#                            Color:
-#                                rgb: C('#FF00FF')
-#                            Rectangle:
-#                                pos: self.pos
-#                                size: self.size
-                        PriceLabel:
-                            text: '[i]Subtotal[/i]'
-                        TotalLabel:
-                            id: total_label
-                    PricingBoxLayout:
-                        PriceLabel:
-                            text: '[i]Total Tax[/i]'
-                        TotalLabel:
-                            id: tax_total_label
-                            text: '[i]$0.00[/i]'
-                    PricingBoxLayout:
-                        PriceLabel:
-                            text: '[i]Order Total[/i]'
-                        TotalLabel:
-                            id: total_price_label
-                            font_size: 84
+                    spacing: '12dp'
+                    BoxLayout:
+                        #  [padding_left, padding_top, padding_right, padding_bottom]
+                        padding: '24dp', '0pd', '0dp', '0dp'
+                        size_hint: 1, .15
+                        Label:
+                            text: 'Pricing'
+                            color: C('#E4E4E7')
                             font_name: 'Inter'
-                    PricingBoxLayout:
-                        PriceLabel:
-                            text: 'Estimated time\nto prepare'
-                        TotalLabel:
-                            text: '10 minutes'
-                    Button:
-                        text: 'Send price'
-                        on_press:root.update_order_status(status.AWAITING_PAYMENT)
+                            font_size: 22
+                            markup: True
+                            text_size: self.size 
+                            halign: 'left'
+                            valign: 'middle'
+                    BoxLayout:
+                        spacing: '8dp'
+                        padding: '24dp', '0dp', '0dp', '0dp'
+                        size_hint: 1, .15
+                        SubtotalEditor:
+                            id: price_subtotal
+                            heading_text: 'Subtotal'
+                            size_hint: 1, 1
+                        SubtotalEditor:
+                            id: tax
+                            heading_text: 'Tax'
+                            size_hint: 1, 1
+                        SubtotalEditor:
+                            id: fee
+                            size_hint: 1, 1
+                            heading_text: 'Textnibble Fee'
+                        SubtotalEditor:
+                            id: total
+                            heading_text: 'Total'
+                            size_hint: 1, 1
+                    BoxLayout:
+                        #  [padding_left, padding_top, padding_right, padding_bottom]
+                        padding: '24dp', '0pd', '0dp', '0dp'
+                        size_hint: 1, .15
+                        Label:
+                            text: 'Preparation Time'
+                            color: C('#E4E4E7')
+                            font_name: 'Inter'
+                            font_size: 22
+                            markup: True
+                            text_size: self.size 
+                            halign: 'left'
+                            valign: 'middle'
+ 
+                    BoxLayout:
+                        spacing: '8dp'
+                        padding: '24dp', '0dp', '0dp', '0dp'
+                        size_hint: .25, .15
+                        SubtotalEditor:
+                            heading_text: 'Minutes'
+                            subtotal_text: '10'
+                            size_hint: 1, 1
+
+                    BoxLayout:
+                        size_hint: 1, 1
+#                   PricingBoxLayout:
+#                       padding: '24dp'
+#                       size_hint: 1, .2
+#                       canvas.before:
+#                           Color:
+#                               rgb: C('#FF0000')
+#                           Line:
+#                               width: 1
+#                               rounded_rectangle: self.x, self.y, self.width, self.height, 12
+#                       PriceLabel:
+#                           text: 'Estimated time\nto prepare'
+#                       TotalLabel:
+#                           text: '10 minutes'
+#                   PricingBoxLayout:
+#                       size_hint: 1, .2
+#                       canvas.before:
+#                       PriceLabel:
+#                           text: '[i]Subtotal[/i]'
+#                       TotalLabel:
+#                           id: total_label
+#                   PricingBoxLayout:
+#
+#                       size_hint: 1, .2
+#                       canvas.before:
+#                       PriceLabel:
+#                           text: '[i]Total Tax[/i]'
+#                       TotalLabel:
+#                           id: tax_total_label
+#                           text: '[i]$0.00[/i]'
+#                   PricingBoxLayout:
+#                       size_hint: 1, .2
+#                       canvas.before:
+#                       PriceLabel:
+#                           text: '[i]Order Total[/i]'
+#                       TotalLabel:
+#                           id: total_price_label
+#                           font_size: 84
+#                           font_name: 'Inter'
+#                       #Button:
+                        #text: 'Send price'
+                        #on_press:root.update_order_status(status.AWAITING_PAYMENT)
             BoxLayout:
                 id: keypad
                 canvas.before:
@@ -195,7 +261,7 @@
                     Rectangle:
                         size: self.size
                         pos: self.pos
-                size_hint: .35, 1
+                size_hint: .2, 1
                 AnchorLayout:
                     Numpad:
                         id:numpad
