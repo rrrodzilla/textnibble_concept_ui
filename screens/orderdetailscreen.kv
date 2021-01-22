@@ -175,10 +175,12 @@
                             id: price_subtotal
                             heading_text: 'Subtotal'
                             size_hint: 1, 1
+                            show_entry_button: True
                         SubtotalEditor:
                             id: tax
                             heading_text: 'Tax'
                             size_hint: 1, 1
+                            show_entry_button: True
                         SubtotalEditor:
                             id: fee
                             size_hint: 1, 1
@@ -220,64 +222,11 @@
                     Rectangle:
                         size: self.size
                         pos: self.pos
-                size_hint: .2, 1
+                size_hint: .1, 1
                 AnchorLayout:
                     Numpad:
                         id:numpad
                         size_hint: None, None
                         height: self.minimum_height
                         width: self.minimum_width
-#        BoxLayout:
-#            id: buttons
-##            canvas.before:
-##                Color:
-##                    rgb: C('#FF00FF')
-##                Rectangle:
-##                    size: self.size
-##                    pos: self.pos
-#            spacing: 8
-#            size_hint: 1, None
-#            height: 96
-#            size_hint_max_x: 128
-#            padding: 24
-#            minimum_width: self.width
-#            pos_hint: {'center_y': 1, 'center_x': .5}
-##            SimpleButton:
-##                text: 'Message'
-##                on_press:root.update_order_status(status.AWAITING_REPLY)
-#            SimpleButton:
-#                text: 'Replied'
-#                on_press:root.update_order_status(status.UPDATED)
-#            SimpleButton:
-#                text: 'Quote'
-#                on_press:root.update_order_status(status.AWAITING_PAYMENT)
-#            SimpleButton:
-#                text: 'Paid'
-#                on_press:root.update_order_status(status.PAID)
-#            SimpleButton:
-#                text: 'To Kitchen'
-#                on_press:root.update_order_status(status.WORKING)
-#            SimpleButton:
-#                text: 'Finish'
-#                on_press:root.update_order_status(status.AWAITING_PICKUP)
-#            SimpleButton:
-#                text: 'Picked Up'
-#                on_press:root.update_order_status(status.FULFILLED)
-#        BoxLayout:
-##            canvas.before:
-##                Color:
-##                    rgb: C('#0000FF')
-##                Rectangle:
-##                    size: self.size
-##                    pos: self.pos
-#            pos_hint: {'center_y': 1}
-#            spacing: 96
-#            size_hint: 1, None
-#            height: 96
-#            Label:
-#                text: root.current_order.customer_name if (root.current_order is not None and root.current_order.customer_name) else ''
-#            Label:
-#                text: root.current_order.conversation[0].message if (root.current_order is not None and root.current_order.conversation) else ''
-#            Label:
-#                text: root.current_order.status.name if (root.current_order is not None and root.current_order.status) else ''
 
