@@ -1,5 +1,5 @@
 from kivy.uix.boxlayout import BoxLayout
-from kivy.properties import StringProperty, ObjectProperty
+from kivy.properties import StringProperty, ObjectProperty, BooleanProperty
 from widgets.subtotal import Subtotal
 
 
@@ -7,6 +7,7 @@ class SubtotalEditor(BoxLayout):
     heading_text = StringProperty(rebind=True)
     subtotal_text = StringProperty(rebind=True)
     subtotal = ObjectProperty(rebind=True)
+    show_entry_button = BooleanProperty(False, rebind=True)
 
     def __init__(self, **kwargs):
         self.register_event_type("on_updated")

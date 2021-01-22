@@ -212,47 +212,6 @@
 
                     BoxLayout:
                         size_hint: 1, 1
-#                   PricingBoxLayout:
-#                       padding: '24dp'
-#                       size_hint: 1, .2
-#                       canvas.before:
-#                           Color:
-#                               rgb: C('#FF0000')
-#                           Line:
-#                               width: 1
-#                               rounded_rectangle: self.x, self.y, self.width, self.height, 12
-#                       PriceLabel:
-#                           text: 'Estimated time\nto prepare'
-#                       TotalLabel:
-#                           text: '10 minutes'
-#                   PricingBoxLayout:
-#                       size_hint: 1, .2
-#                       canvas.before:
-#                       PriceLabel:
-#                           text: '[i]Subtotal[/i]'
-#                       TotalLabel:
-#                           id: total_label
-#                   PricingBoxLayout:
-#
-#                       size_hint: 1, .2
-#                       canvas.before:
-#                       PriceLabel:
-#                           text: '[i]Total Tax[/i]'
-#                       TotalLabel:
-#                           id: tax_total_label
-#                           text: '[i]$0.00[/i]'
-#                   PricingBoxLayout:
-#                       size_hint: 1, .2
-#                       canvas.before:
-#                       PriceLabel:
-#                           text: '[i]Order Total[/i]'
-#                       TotalLabel:
-#                           id: total_price_label
-#                           font_size: 84
-#                           font_name: 'Inter'
-#                       #Button:
-                        #text: 'Send price'
-                        #on_press:root.update_order_status(status.AWAITING_PAYMENT)
             BoxLayout:
                 id: keypad
                 canvas.before:

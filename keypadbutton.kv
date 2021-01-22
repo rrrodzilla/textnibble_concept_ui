@@ -2,9 +2,11 @@
 #:import C kivy.utils.get_color_from_hex
 
 <KeypadButton>:
+    disabled_color:
+    enabled_color:
     canvas.before:
         Color:
-            rgb: (C('#15803D') if not self.disabled else C('#3F3F46')) #3F6212
+            rgb: (root.enabled_color if not self.disabled else root.disabled_color) #3F6212
         RoundedRectangle:
             size: self.size
             pos: self.pos
