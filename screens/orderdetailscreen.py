@@ -39,7 +39,7 @@ class OrderDetailScreen(Screen):
         else:
             self.ids.price_subtotal.subtotal.append(args[0])
 
-    def update_total(self, value, *args):
+    def update_total(self, *args):
         self.ids.total.subtotal.clear()
         self.ids.total.set_value(
             str(

@@ -17,18 +17,26 @@ class SubtotalEditor(BoxLayout):
         self.subtotal.bind(on_changed=self.update)
         self.numpad = Numpad()
         self.numpad.id = "numpad"
+        self.numpad.bind(on_key_pressed=self.set_price_subtotal)
+        self.numpad.bind(on_done_pressed=self.toggle_num_pad)
         self.show_numpad = False
         super(SubtotalEditor, self).__init__(**kwargs)
 
     def on_updated(self, *args):
         pass
 
+    def set_price_subtotal(self, value, *args):
+        if args[0] == "[font=Icons]\uef00[/font]":
+            self.subtotal.clear()
+        else:
+            self.subtotal.append(args[0])
+
     def update(self, *args):
         self.dispatch("on_updated")
         prop = self.property("subtotal")
         prop.dispatch(self)
 
-    def set_value(self, value):
+    def set_value(self, value, *args):
         self.subtotal.clear()
         for letter in [char for char in value]:
             self.subtotal.append(letter)

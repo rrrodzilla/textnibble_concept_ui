@@ -137,15 +137,16 @@
                     Rectangle:
                         size: self.size
                         pos: self.pos
-                size_hint: .45, 1
+                size_hint: 1, 1
 
                 BoxLayout:
                     orientation: 'vertical'
                     spacing: '12dp'
+                    padding: '48dp', '24dp', '48dp', '24dp'
                     pos_hint: {'top':1}
                     BoxLayout:
                         #  [padding_left, padding_top, padding_right, padding_bottom]
-                        padding: '24dp', '0pd', '0dp', '0dp'
+#                       padding: '0dp', '0dp', '0dp', '48dp'
                         size_hint: 1, None
                         Label:
                             text: 'Pricing'
@@ -158,15 +159,17 @@
                             valign: 'middle'
                     BoxLayout:
                         spacing: '8dp'
-                        padding: '24dp', '0dp', '0dp', '0dp'
+#                       padding: '24dp', '0dp', '0dp', '0dp'
                         size_hint: 1, None
                         SubtotalEditor:
                             id: price_subtotal
                             heading_text: 'Subtotal'
+                            on_updated: root.update_total()
                             size_hint: 1, 1
                             show_entry_button: True
                         SubtotalEditor:
                             id: tax
+                            on_updated: root.update_total()
                             heading_text: 'Tax'
                             size_hint: 1, 1
                             show_entry_button: True
@@ -180,7 +183,7 @@
                             size_hint: 1, 1
                     BoxLayout:
                         #  [padding_left, padding_top, padding_right, padding_bottom]
-                        padding: '24dp', '0pd', '0dp', '0dp'
+#                       padding: '24dp', '0pd', '0dp', '0dp'
                         size_hint: 1, None
                         Label:
                             text: 'Preparation Time'
@@ -194,7 +197,7 @@
  
                     BoxLayout:
                         spacing: '8dp'
-                        padding: '24dp', '0dp', '0dp', '0dp'
+#                       padding: '24dp', '0dp', '0dp', '0dp'
                         size_hint: .25, None
                         SubtotalEditor:
                             heading_text: 'Minutes'

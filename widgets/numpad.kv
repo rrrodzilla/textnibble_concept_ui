@@ -3,14 +3,14 @@
 #:import KeypadButton keypadbutton
 
 <NumPadButton@KeypadButton>:
-    color: C('#27272A')
+    color: C('#262626')
     size: ['48dp', '48dp']
     font_size: '14dp'
-    enabled_color: C('#F5F5F4')
+    enabled_color: C('#D97706')
 <Numpad>:
     canvas.before:
         Color:
-            rgba: C('#5252529E')
+            rgba: C('F5F5F5E5')
         RoundedRectangle:
             size: self.width + 48, self.height + 18
             pos: self.pos[0] - 24, self.pos[1] - 12
@@ -84,6 +84,7 @@
             text: 'Done'
             disabled: root.disabled
             size_hint: 1, None
+            on_press: root.dispatch('on_done_pressed', self.key_val)
             height: '48dp'
             width: root.width
             font_size: '14sp'
