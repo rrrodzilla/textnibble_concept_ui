@@ -8,10 +8,12 @@
 #:include ./widgets/subtotaleditor.kv
 #:import KeypadButton widgets.keypadbutton
 #:include ./widgets/keypadbutton.kv
+#:set large_heading_opacity .35
 
 <EstimateButton@KeypadButton>
     font_size: '14sp'
-    enabled_color: C('#CA8A04')
+    enabled_color: C('#52525B')
+    disabled_color: C('#A1A1AA')
 <PricingBoxLayout@BoxLayout>
     padding: 0, 0, 48, 0
 <PriceLabel@Label>
@@ -59,45 +61,38 @@
             pos: self.pos
             size: self.size
     BoxLayout:
-#        canvas.before:
-#            Color:
-#                rgb: C('#FF00FF')
-#            Rectangle:
-#                size: self.size
-#                pos: self.pos
         size_hint: 1, 1
         pos_hint: {'center_y': .5, 'center_x': .5}
         orientation: 'vertical'
         BoxLayout:
-#            canvas.before:
-#                Color:
-#                    rgb: C('#FF00FF')
-#                Rectangle:
-#                    size: self.size
-#                    pos: self.pos
             size_hint: 1, 1
             BoxLayout:
                 id: conversation_layout
                 orientation: 'vertical'
-                size_hint: .25, 1
+                size_hint: .3, 1
                 pos_hint: {'center_y': .5}
-                padding:  24, 0, 24, 24
+                padding: 24
                 Label:
-#                    canvas.before:
-#                        Color:
-#                            rgb: C('#00FF00')
-#                        Rectangle:
-#                            size: self.size
-#                            pos: self.pos
-                    text: '[i]Conversation[/i]'
+                    text: 'Review'
                     color: C('#E5E5E5')
                     font_name: 'Inter'
-                    font_size: 22
+                    opacity: large_heading_opacity
+                    bold: True
+                    font_size: 60
                     markup: True
+                    text_size: self.size 
+                    halign: 'left'
+                    valign: 'middle'
                     size_hint: 1, None
-#                    size: self.texture_size
-                    height: 96
+                    height: '96dp'
                 ScrollView:
+#                   canvas.before:
+#                       Color:
+#                           rgb: C('#00FF00')
+#                       Rectangle:
+#                           size: self.size
+#                           pos: self.pos
+
                     id: scroll_view
                     pos_hint: {"center_x": .5}
                     width: conversation_layout.minimum_width
@@ -110,6 +105,7 @@
                         cols: 1
                         spacing: 60
 #                        padding: 0, 0, 0, 60
+                        padding: 0, 18, 0, 0
                         size_hint: 1, None
                         height: self.minimum_height
                         width: self.minimum_width
@@ -151,13 +147,15 @@
                     pos_hint: {'top':1}
                     BoxLayout:
                         #  [padding_left, padding_top, padding_right, padding_bottom]
-#                       padding: '0dp', '0dp', '0dp', '48dp'
                         size_hint: 1, None
                         Label:
-                            text: 'Pricing'
+                            text: 'Price'
+                            opacity: .3
                             color: C('#E4E4E7')
                             font_name: 'Inter'
-                            font_size: 22
+                            bold: True
+                            font_size: 60
+                            opacity: large_heading_opacity
                             markup: True
                             text_size: self.size 
                             halign: 'left'
@@ -182,6 +180,7 @@
                             id: fee
                             size_hint: 1, None
                             heading_text: 'Textnibble Fee'
+                            opacity: .4
                         SubtotalEditor:
                             id: total
                             heading_text: 'Total'
@@ -191,10 +190,12 @@
 #                       padding: '24dp', '0pd', '0dp', '0dp'
                         size_hint: 1, None
                         Label:
-                            text: 'Preparation Time'
+                            text: 'Estimate'
                             color: C('#E4E4E7')
                             font_name: 'Inter'
-                            font_size: 22
+                            bold: True
+                            font_size: 60
+                            opacity: large_heading_opacity
                             markup: True
                             text_size: self.size 
                             halign: 'left'
@@ -203,11 +204,14 @@
                     BoxLayout:
                         spacing: '48dp'
 #                       padding: '24dp', '0dp', '0dp', '0dp'
-                        size_hint: .25, 1
+                        size_hint: .25, None
                         EstimateButton:
                             text: '5 mins'
                         EstimateButton:
                             text: '10 mins'
+                            disabled: True
+
+                            color: C('#52525B')
                         EstimateButton:
                             text: '15 mins'
                         EstimateButton:

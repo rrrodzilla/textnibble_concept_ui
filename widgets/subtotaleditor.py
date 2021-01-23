@@ -3,9 +3,10 @@ from kivy.graphics import Color, Rectangle, Canvas
 from kivy.properties import StringProperty, ObjectProperty, BooleanProperty
 from widgets.subtotal import Subtotal
 from widgets.numpad import Numpad
+from kivy.uix.behaviors import ButtonBehavior
 
 
-class SubtotalEditor(BoxLayout):
+class SubtotalEditor(ButtonBehavior, BoxLayout):
     heading_text = StringProperty(rebind=True)
     subtotal_text = StringProperty(rebind=True)
     subtotal = ObjectProperty(rebind=True)
@@ -24,6 +25,11 @@ class SubtotalEditor(BoxLayout):
 
     def on_updated(self, *args):
         pass
+
+    def on_press(self):
+        print("pressed")
+        if self.show_entry_button:
+            self.toggle_num_pad()
 
     def set_price_subtotal(self, value, *args):
         if args[0] == "[font=Icons]\uef00[/font]":

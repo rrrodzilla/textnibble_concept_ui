@@ -31,17 +31,27 @@ class OrderManager(Widget):
     fulfilled = ListProperty(rebind=True)
     current_order = ObjectProperty(orderObj(), rebind=True)
     food_word_list = [
-        'latte', 'muffin', 'cappuccino',
-        'breakfast sandwich', 'iced tea', 'chocolate chip cookie',
-        'salad', 'artichoke panini', 'iced latte',
-        'chia pudding', 'avocado toast', 'drip coffee', 'bowl of oatmeal']
+        "latte",
+        "muffin",
+        "cappuccino",
+        "breakfast sandwich",
+        "iced tea",
+        "chocolate chip cookie",
+        "salad",
+        "artichoke panini",
+        "iced latte",
+        "chia pudding",
+        "avocado toast",
+        "drip coffee",
+        "bowl of oatmeal",
+    ]
 
     def __init__(self, **kwargs):
         super(OrderManager, self).__init__(**kwargs)
-        self.register_event_type('on_loaded')
-        self.register_event_type('on_updated')
-        self.register_event_type('on_current_order_changed')
-        self.register_event_type('on_clear')
+        self.register_event_type("on_loaded")
+        self.register_event_type("on_updated")
+        self.register_event_type("on_current_order_changed")
+        self.register_event_type("on_clear")
         # self.load_dummy_orders()
 
     def on_updated(self, *args):
@@ -51,11 +61,11 @@ class OrderManager(Widget):
         pass
 
     def on_current_order(self, value, *args):
-        self.dispatch('on_current_order_changed', *args)
+        self.dispatch("on_current_order_changed", *args)
 
     def clear(self):
         self.all_orders.clear()
-        self.dispatch('on_clear')
+        self.dispatch("on_clear")
 
     def on_clear(self):
         pass
@@ -81,7 +91,7 @@ class OrderManager(Widget):
     def refresh_orders(self, instance, value):
         # TODO get rid of debug statment
         # print('refreshing orders')
-        prop = self.property('all_orders')
+        prop = self.property("all_orders")
         prop.dispatch(self)
 
     def add_dummy_order(self):
@@ -91,34 +101,40 @@ class OrderManager(Widget):
         new_order.customer_name = fake.name()
         # new_order.status = OrderStatus(random.randint(OrderStatus.NEW.value, OrderStatus.FULFILLED.value))
         if new_order.status is OrderStatus.NEW:
-            new_order.time = datetime.now(tz=timezone.utc) + relativedelta(minutes=-random.randint(2, 4))
+            new_order.time = datetime.now(tz=timezone.utc) + relativedelta(
+                minutes=-random.randint(2, 4)
+            )
         else:
-            new_order.time = datetime.now(tz=timezone.utc) + relativedelta(minutes=-random.randint(2, 15))
+            new_order.time = datetime.now(tz=timezone.utc) + relativedelta(
+                minutes=-random.randint(2, 15)
+            )
         msg = ConversationMessage()
         msg.id = msg.uid
         msg.send_time = new_order.time
         msg.sender = new_order.customer_name
-        msg.message = f'{random.randint(1, 2)} {fake.word(ext_word_list=self.food_word_list)} and ' \
-                                  f'{random.randint(1, 2)} {fake.word(ext_word_list=self.food_word_list)}'
+        msg.message = (
+            f"{random.randint(1, 2)} {fake.word(ext_word_list=self.food_word_list)} and "
+            f"{random.randint(1, 2)} {fake.word(ext_word_list=self.food_word_list)}"
+        )
 
         new_order.conversation.append(msg)
 
-        biz_response = ConversationMessage()
-        biz_response.send_time = msg.send_time + relativedelta(seconds=+45)
-        biz_response.id = biz_response.uid
-        biz_response.sender = 'Jibe Espresso Bar - Roland'
-        biz_response.message = 'Hi! What size would you like?'
-        biz_response.is_business_response = True
+        #       biz_response = ConversationMessage()
+        #       biz_response.send_time = msg.send_time + relativedelta(seconds=+45)
+        #       biz_response.id = biz_response.uid
+        #       biz_response.sender = 'Jibe Espresso Bar - Roland'
+        #       biz_response.message = 'Hi! What size would you like?'
+        #       biz_response.is_business_response = True
 
-        new_order.conversation.append(biz_response)
+        #       new_order.conversation.append(biz_response)
 
-        reply = ConversationMessage()
-        reply.id = reply.uid
-        reply.send_time = biz_response.send_time + relativedelta(seconds=+45)
-        reply.sender = new_order.customer_name
-        reply.message = "large thx"
+        #       reply = ConversationMessage()
+        #       reply.id = reply.uid
+        #       reply.send_time = biz_response.send_time + relativedelta(seconds=+45)
+        #       reply.sender = new_order.customer_name
+        #       reply.message = "large thx"
 
-        new_order.conversation.append(reply)
+        #       new_order.conversation.append(reply)
         # new_order.order_message = new_order.conversation[0].message
         new_order.bind(on_updated=self.refresh_orders)
 
@@ -131,5 +147,4 @@ class OrderManager(Widget):
         while count < random.randint(10, 30):
             self.add_dummy_order()
             count = count + 1
-        self.dispatch('on_loaded')
-
+        self.dispatch("on_loaded")

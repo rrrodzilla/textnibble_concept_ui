@@ -19,19 +19,20 @@
         BoxLayout:
             orientation: 'horizontal'
             size_hint: 1, .1
-            padding: 96, 0, 96, 0
+            padding: 24, 0, 24, 0
             StackLayout:
                 Image:
                     source: './images/logo-horizontal-reversed@3x.png'
                     color: C('#A1A1AA')
-                    size_hint: .15, 1
+                    opacity: .3
+                    size_hint: .1, 1
                     allow_stretch: True
                 AlertButton:
                     id: alert_button_urgent
                     on_press: content_manager.nav('urgent_orders')
                     button_text: '[i]Action Needed[/i]'
-                    badge_color: C('#DC2626')
-                    button_color: C('#DC2626')
+                    badge_color: C('#FAFAFA')
+                    button_color: C('#D4D4D8')
                     urgent: True
                     badge_total: len(content_manager.order_manager.urgent_orders)
                 AlertButton:
@@ -48,7 +49,7 @@
                     badge_total: len(content_manager.order_manager.awaiting_pickup_orders)
                 AlertButton:
                     on_press: content_manager.nav('idle_orders')
-                    button_text: 'Idle Orders'
+                    button_text: 'Nothing to Do'
                     button_color: C('#71717A')
                     badge_color: C('#71717A')
                     badge_total: len(content_manager.order_manager.idle_orders)
@@ -65,6 +66,7 @@
             Button:
                 on_press: content_manager.order_manager.add_dummy_order()
                 text: 'Add Order'
+                opacity: .1
                 size_hint: None, None
                 pos_hint: {"center_y": .5}
                 size: [96, 64]
@@ -75,10 +77,11 @@
                 Button:
                     canvas.before:
                         Color:
-                            rgb: C('#D4D4D8')
-                        Ellipse:
+                            rgb: C('#A1A1AA')
+                        RoundedRectangle:
                             size: self.size
                             pos: self.pos
+                            radius: (6, 6, 6, 6)
                     background_color: 0, 0, 0, 0
                     markup: True
                     text: f'[font=Icons][size=24]{chr(60558)}[/size][/font]'

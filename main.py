@@ -43,6 +43,7 @@ if __name__ == "__main__":
         fn_bolditalic="./fonts/Inter-SemiBold.ttf",
     )
     LabelBase.register(name="Icons", fn_regular="./fonts/icofont.ttf")
+    LabelBase.register(name="Inter-Thin", fn_regular="./fonts/Inter-ExtraLight.ttf")
 
     #    Config.set('graphics', 'width', '1920')
     #    Config.set('graphics', 'height', '1080')

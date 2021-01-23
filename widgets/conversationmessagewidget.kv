@@ -30,20 +30,20 @@
             id: msg
             canvas.before:
                 Color:
-                    rgb: C('#0284C7') if not root.conversation.is_business_response else C('#0C4A6E')
+                    rgb: C('#D4D4D8') if not root.conversation.is_business_response else C('#52525B')
                 RoundedRectangle:
                     size: self.size
                     pos: self.pos
-                    radius: [4, 4, 4, 4]
+                    radius: [8, 8, 8, 8]
                 Color:
-                    rgb: C('#0284C7') if not root.conversation.is_business_response else C('#0C4A6E')
+                    rgb: C('#D4D4D8') if not root.conversation.is_business_response else C('#52525B')
                 Triangle:
                     points: [self.width - 48, self.y, self.width - 24, self.y, self.width - 48, self.y - 18] if not root.conversation.is_business_response else [self.x + 48, self.y, self.x + 72, self.y, self.x + 72, self.y - 18]
             pos_hint: {'center_x': .5, 'center_y': .5}
             size_hint: 1, 1
             text_size: self.size
-            font_size: 16
-            color: C('#F5F5F5') if not root.conversation.is_business_response else C('#A3A3A3')
+            font_size: 18
+            color: C('#3F3F46') if not root.conversation.is_business_response else C('#A1A1AA')
             halign: 'left'
             valign: 'top'
             padding: 24, 24
@@ -68,9 +68,11 @@
 #                        pos: self.pos
                 id: msg_sender
                 text: f'[i]{root.conversation.sender}[/i]'
+                font_size: 16
                 color: C('#F5F5F5') if not root.conversation.is_business_response else C('#737373')
 #                halign: 'right' if not root.conversation.is_business_response else 'left'
             MessageLabel:
                 id: msg_time
                 text: f'[i] - {root.humanized_time}[/i]'
+                font_size: 16
                 color: C('#F5F5F5') if not root.conversation.is_business_response else C('#737373')
