@@ -28,11 +28,11 @@ class OrderDetailScreen(Screen):
 
         print("current order changed")
 
-    def on_pre_enter(self, *args):
-        # bindings for subtotal changes
-        self.ids.price_subtotal.subtotal.bind(on_changed=self.update_total)
-        self.ids.numpad.bind(on_key_pressed=self.set_price_subtotal)
-
+    #   def on_pre_enter(self, *args):
+    #       # bindings for subtotal changes
+    #       self.ids.price_subtotal.subtotal.bind(on_changed=self.update_total)
+    #       self.ids.numpad.bind(on_key_pressed=self.set_price_subtotal)
+    #
     def set_price_subtotal(self, value, *args):
         if args[0] == "Clear":
             self.ids.price_subtotal.subtotal.clear()

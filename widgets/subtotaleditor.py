@@ -35,12 +35,13 @@ class SubtotalEditor(BoxLayout):
 
     def toggle_num_pad(self, *args):
         self.show_numpad = not self.show_numpad
+        root = self.get_root_window()
         if self.show_numpad:
             self.numpad.pos = (
                 self.pos[0] + ((self.width - self.numpad.minimum_width) / 2),
                 self.pos[1] - self.numpad.minimum_height - 12,
             )
             self.numpad.size_hint = None, None
-            self.ids.numpad_layout.add_widget(self.numpad)
+            root.add_widget(self.numpad)
         else:
-            self.ids.numpad_layout.remove_widget(self.numpad)
+            root.remove_widget(self.numpad)

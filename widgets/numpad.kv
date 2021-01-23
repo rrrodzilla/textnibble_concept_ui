@@ -8,60 +8,82 @@
     font_size: '14dp'
     enabled_color: C('#F5F5F4')
 <Numpad>:
+    canvas.before:
+        Color:
+            rgba: C('#65A30DA1')
+        RoundedRectangle:
+            size: self.width + 48, self.height + 18
+            pos: self.pos[0] - 24, self.pos[1] - 12
+            radius: [6, 6, 6, 6]
+
     width: self.minimum_width
     height: self.minimum_height
     size_hint: None, None
-    cols: 3
-    spacing: 6
-    NumPadButton:
-        text: '1'
-        disabled: root.disabled
-        on_press: root.dispatch('on_key_pressed', self.key_val)
-    NumPadButton:
-        text: '2'
-        disabled: root.disabled
-        on_press: root.dispatch('on_key_pressed', self.key_val)
-    NumPadButton:
-        text: '3'
-        disabled: root.disabled
-        on_press: root.dispatch('on_key_pressed', self.key_val)
-    NumPadButton:
-        text: '4'
-        disabled: root.disabled
-        on_press: root.dispatch('on_key_pressed', self.key_val)
-    NumPadButton:
-        text: '5'
-        disabled: root.disabled
-        on_press: root.dispatch('on_key_pressed', self.key_val)
-    NumPadButton:
-        text: '6'
-        disabled: root.disabled
-        on_press: root.dispatch('on_key_pressed', self.key_val)
-    NumPadButton:
-        text: '7'
-        disabled: root.disabled
-        on_press: root.dispatch('on_key_pressed', self.key_val)
-    NumPadButton:
-        text: '8'
-        disabled: root.disabled
-        on_press: root.dispatch('on_key_pressed', self.key_val)
-    NumPadButton:
-        text: '9'
-        disabled: root.disabled
-        on_press: root.dispatch('on_key_pressed', self.key_val)
-    NumPadButton:
-        text: '0'
-        disabled: root.disabled
-        on_press: root.dispatch('on_key_pressed', self.key_val)
-    NumPadButton:
-        text: '00'
-        disabled: root.disabled
-        on_press: root.dispatch('on_key_pressed', self.key_val)
-    NumPadButton:
-        text: f'[font=Icons]{chr(61184)}[/font]'
-        markup: True
-        font_size: 18
-        disabled: root.disabled
-        on_press: root.dispatch('on_key_pressed', self.key_val)
-        enabled_color: C('#FB923C')
-
+    GridLayout:
+        width: self.minimum_width
+        height: self.minimum_height
+        size_hint: None, None
+        cols: 3
+        spacing: 6
+        NumPadButton:
+            text: '1'
+            disabled: root.disabled
+            on_press: root.dispatch('on_key_pressed', self.key_val)
+        NumPadButton:
+            text: '2'
+            disabled: root.disabled
+            on_press: root.dispatch('on_key_pressed', self.key_val)
+        NumPadButton:
+            text: '3'
+            disabled: root.disabled
+            on_press: root.dispatch('on_key_pressed', self.key_val)
+        NumPadButton:
+            text: '4'
+            disabled: root.disabled
+            on_press: root.dispatch('on_key_pressed', self.key_val)
+        NumPadButton:
+            text: '5'
+            disabled: root.disabled
+            on_press: root.dispatch('on_key_pressed', self.key_val)
+        NumPadButton:
+            text: '6'
+            disabled: root.disabled
+            on_press: root.dispatch('on_key_pressed', self.key_val)
+        NumPadButton:
+            text: '7'
+            disabled: root.disabled
+            on_press: root.dispatch('on_key_pressed', self.key_val)
+        NumPadButton:
+            text: '8'
+            disabled: root.disabled
+            on_press: root.dispatch('on_key_pressed', self.key_val)
+        NumPadButton:
+            text: '9'
+            disabled: root.disabled
+            on_press: root.dispatch('on_key_pressed', self.key_val)
+        NumPadButton:
+            text: '0'
+            disabled: root.disabled
+            on_press: root.dispatch('on_key_pressed', self.key_val)
+        NumPadButton:
+            text: '00'
+            disabled: root.disabled
+            on_press: root.dispatch('on_key_pressed', self.key_val)
+        NumPadButton:
+            text: f'[font=Icons]{chr(61184)}[/font]'
+            markup: True
+            font_size: 18
+            disabled: root.disabled
+            on_press: root.dispatch('on_key_pressed', self.key_val)
+            enabled_color: C('#FB923C')
+    BoxLayout:
+        padding: 0, 12, 0, 0
+        size_hint: 1, None
+        height: self.minimum_height
+        KeypadButton:
+            text: 'Done'
+            disabled: root.disabled
+            size_hint: 1, None
+            height: '48dp'
+            width: root.width
+            font_size: '14sp'

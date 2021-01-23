@@ -120,22 +120,10 @@
                     spacing: 8
                     TextInput:
                         id: msg_input
-#                        canvas.before:
-#                            Color:
-#                                rgb: C('#00FF00')
-#                            Rectangle:
-#                                size: self.size
-#                                pos: self.pos
                         font_name: 'Inter'
                         pos_hint: {"center_y": .5}
                         size_hint: .7, 1
                     Button:
-#                        canvas.before:
-#                            Color:
-#                                rgb: C('#FF0000')
-#                            Rectangle:
-#                                size: self.size
-#                                pos: self.pos
                         pos_hint: {"center_y": .5}
                         on_press:root.send_order_message()
                         size_hint: .3, 1
@@ -154,10 +142,11 @@
                 BoxLayout:
                     orientation: 'vertical'
                     spacing: '12dp'
+                    pos_hint: {'top':1}
                     BoxLayout:
                         #  [padding_left, padding_top, padding_right, padding_bottom]
                         padding: '24dp', '0pd', '0dp', '0dp'
-                        size_hint: 1, .15
+                        size_hint: 1, None
                         Label:
                             text: 'Pricing'
                             color: C('#E4E4E7')
@@ -170,7 +159,7 @@
                     BoxLayout:
                         spacing: '8dp'
                         padding: '24dp', '0dp', '0dp', '0dp'
-                        size_hint: 1, .15
+                        size_hint: 1, None
                         SubtotalEditor:
                             id: price_subtotal
                             heading_text: 'Subtotal'
@@ -183,7 +172,7 @@
                             show_entry_button: True
                         SubtotalEditor:
                             id: fee
-                            size_hint: 1, 1
+                            size_hint: 1, None
                             heading_text: 'Textnibble Fee'
                         SubtotalEditor:
                             id: total
@@ -192,7 +181,7 @@
                     BoxLayout:
                         #  [padding_left, padding_top, padding_right, padding_bottom]
                         padding: '24dp', '0pd', '0dp', '0dp'
-                        size_hint: 1, .15
+                        size_hint: 1, None
                         Label:
                             text: 'Preparation Time'
                             color: C('#E4E4E7')
@@ -206,7 +195,7 @@
                     BoxLayout:
                         spacing: '8dp'
                         padding: '24dp', '0dp', '0dp', '0dp'
-                        size_hint: .25, .15
+                        size_hint: .25, None
                         SubtotalEditor:
                             heading_text: 'Minutes'
                             subtotal_text: '10'
@@ -214,19 +203,19 @@
 
                     BoxLayout:
                         size_hint: 1, 1
-            BoxLayout:
-                id: keypad
-                canvas.before:
-                    Color:
-                        rgb: C('#0F0F0F')
-                    Rectangle:
-                        size: self.size
-                        pos: self.pos
-                size_hint: .1, 1
-                AnchorLayout:
-                    Numpad:
-                        id:numpad
-                        size_hint: None, None
-                        height: self.minimum_height
-                        width: self.minimum_width
-
+#           BoxLayout:
+#               id: keypad
+#               canvas.before:
+#                   Color:
+#                       rgb: C('#0F0F0F')
+#                   Rectangle:
+#                       size: self.size
+#                       pos: self.pos
+#               size_hint: .1, 1
+#               AnchorLayout:
+#                   Numpad:
+#                       id:numpad
+#                       size_hint: None, None
+#                       height: self.minimum_height
+#                       width: self.minimum_width
+#
