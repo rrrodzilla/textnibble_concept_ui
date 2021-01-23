@@ -6,7 +6,12 @@
 #:include ./widgets/numpad.kv
 #:import SubtotalEditor widgets.subtotaleditor
 #:include ./widgets/subtotaleditor.kv
+#:import KeypadButton widgets.keypadbutton
+#:include ./widgets/keypadbutton.kv
 
+<EstimateButton@KeypadButton>
+    font_size: '14sp'
+    enabled_color: C('#CA8A04')
 <PricingBoxLayout@BoxLayout>
     padding: 0, 0, 48, 0
 <PriceLabel@Label>
@@ -196,29 +201,26 @@
                             valign: 'middle'
  
                     BoxLayout:
-                        spacing: '8dp'
+                        spacing: '48dp'
 #                       padding: '24dp', '0dp', '0dp', '0dp'
-                        size_hint: .25, None
-                        SubtotalEditor:
-                            heading_text: 'Minutes'
-                            subtotal_text: '10'
-                            size_hint: 1, 1
+                        size_hint: .25, 1
+                        EstimateButton:
+                            text: '5 mins'
+                        EstimateButton:
+                            text: '10 mins'
+                        EstimateButton:
+                            text: '15 mins'
+                        EstimateButton:
+                            text: '20 mins'
+                        EstimateButton:
+                            text: '<30 mins'
+                        EstimateButton:
+                            text: '45 mins'
+                        EstimateButton:
+                            text: '60 mins'
+                        EstimateButton:
+                            text: '>60 mins'
 
                     BoxLayout:
                         size_hint: 1, 1
-#           BoxLayout:
-#               id: keypad
-#               canvas.before:
-#                   Color:
-#                       rgb: C('#0F0F0F')
-#                   Rectangle:
-#                       size: self.size
-#                       pos: self.pos
-#               size_hint: .1, 1
-#               AnchorLayout:
-#                   Numpad:
-#                       id:numpad
-#                       size_hint: None, None
-#                       height: self.minimum_height
-#                       width: self.minimum_width
 #
