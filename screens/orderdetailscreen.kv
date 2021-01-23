@@ -1,6 +1,7 @@
 #:kivy 2.0.0
 #:import C kivy.utils.get_color_from_hex
 #:import status models.order_status_enum.OrderStatus
+#:import ConversationMessageWidget widgets.conversationmessagewidget
 #:include ./widgets/conversationmessagewidget.kv
 #:import Numpad widgets.numpad
 #:include ./widgets/numpad.kv
@@ -10,10 +11,24 @@
 #:include ./widgets/keypadbutton.kv
 #:set large_heading_opacity .35
 
-<EstimateButton@KeypadButton>
-    font_size: '14sp'
-    enabled_color: C('#52525B')
-    disabled_color: C('#A1A1AA')
+<EstimateButton@ToggleButton>
+    canvas.before:
+        Color:
+            rgb: C('#3F3F46') if not self.state == 'down' else C('#E4E4E7')
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [4, 4, 4, 4]
+    background_color: 0, 0, 0, 0
+    color: C('#E4E4E7') if not self.state == 'down' else C('#3F3F46')
+    font_size: '16sp'
+    group: 'time_estimate'
+    text_size: self.size
+    halign: 'center'
+    valign: 'middle'
+    background_normal: ''
+    markup: True
+
 <PricingBoxLayout@BoxLayout>
     padding: 0, 0, 48, 0
 <PriceLabel@Label>
@@ -54,6 +69,8 @@
 <OrderDetailScreen>:
     current_order: root.manager.order_manager.current_order
     name: 'order_detail'
+    time_estimate: root.time_estimate
+    price_estimate: root.price_estimate
     canvas.before:
         Color:
             rgb: C('#18181B')
@@ -204,27 +221,39 @@
                     BoxLayout:
                         spacing: '48dp'
 #                       padding: '24dp', '0dp', '0dp', '0dp'
-                        size_hint: .25, None
+                        size_hint: 1, None
                         EstimateButton:
-                            text: '5 mins'
+                            text: '[size=24sp][b]5[/b][/size]\nmins or less'
+                            on_press: root.toggle_pressed('should take 5 or less')
                         EstimateButton:
-                            text: '10 mins'
-                            disabled: True
-
-                            color: C('#52525B')
+                            on_press: root.toggle_pressed('should take about 10')
+                            text: '[size=24sp][b]10[/b][/size]\n mins'
                         EstimateButton:
-                            text: '15 mins'
+                            text: '[size=24sp][b]15[/b][/size]\n mins'
+                            on_press: root.toggle_pressed('should take about 15')
                         EstimateButton:
-                            text: '20 mins'
+                            text: '[size=24sp][b]20[/b][/size]\n mins'
+                            on_press: root.toggle_pressed('should take about 20')
+                        EstimateButton: 
+                            text: '[size=24sp][b]30[/b][/size]\n mins'
+                            on_press: root.toggle_pressed('should take about 30')
                         EstimateButton:
-                            text: '<30 mins'
+                            text: '[size=24sp][b]45[/b][/size]\n mins'
+                            on_press: root.toggle_pressed('should take about 45')
                         EstimateButton:
-                            text: '45 mins'
+                            text: '[size=24sp][b]60[/b][/size]\n mins'
+                            on_press: root.toggle_pressed('could take up to 60')
                         EstimateButton:
-                            text: '60 mins'
-                        EstimateButton:
-                            text: '>60 mins'
-
+                            on_press: root.toggle_pressed('could take 60 or more')
+                            text: '[size=24sp][b]60[/b][/size]\n mins or more'
+                    BoxLayout:
+                        Label: 
+                            id: draft_price_quote
+                            font_name:'Inter-Thin'
+                            markup: True
+                            font_size: '48sp'
+                            text_size: self.size
+                            text:  "Your order " + root.time_estimate + " minutes once you've paid " + root.price_estimate + " including our 75 cent Textnibble platform fee."
                     BoxLayout:
                         size_hint: 1, 1
 #

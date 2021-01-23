@@ -13,6 +13,8 @@ from widgets.conversationmessagewidget import ConversationMessageWidget
 
 class OrderDetailScreen(Screen):
     current_order = ObjectProperty(rebind=True)
+    time_estimate = StringProperty(rebind=True)
+    price_estimate = StringProperty(rebind=True)
 
     def __init__(self, **kwargs):
         # self.current_order = Order()
@@ -25,8 +27,6 @@ class OrderDetailScreen(Screen):
         self.ids.fee.set_value("75")
         for message in value.conversation:
             self.ids.conversation.add_widget(ConversationMessageWidget(message))
-
-        print("current order changed")
 
     #   def on_pre_enter(self, *args):
     #       # bindings for subtotal changes
@@ -50,9 +50,16 @@ class OrderDetailScreen(Screen):
                 )
             )
         )
+        print(f"updating price_estimate to {self.ids.total.subtotal_text}")
+        self.price_estimate = self.ids.total.subtotal_text
+        return False
 
     def on_conversation_updated(self, value, *args):
         convo = args[0]
+
+    def toggle_pressed(self, *args):
+        self.time_estimate = args[0]
+        print(f"time_estimate is now {self.time_estimate}")
 
     def send_order_message(self):
         msg = ConversationMessage()

@@ -29,7 +29,8 @@
 <SubtotalEditor>:
     subtotal:
     heading_text:
-    subtotal_text:
+    subtotal_text:"${:,.2f}".format(root.subtotal.total)
+
     show_entry_button:
     canvas.before:
         Color:
@@ -70,7 +71,7 @@
             Heading: 
                 text: root.heading_text
             SubtotalHeading:
-                text: "${:,.2f}".format(root.subtotal.total)
+                text: root.subtotal_text
     FloatLayout:
         id: numpad_layout
         height: 0
